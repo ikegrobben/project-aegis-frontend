@@ -1,0 +1,13 @@
+@import "../../assets/css/variables.scss";
+
+footer {
+  position: absolute;
+  background: $sub-bg-dark-color;
+  bottom: 0em;
+  width: 100%;
+  padding: 0.625em;
+
+  p {
+    text-align: center;
+  }
+}

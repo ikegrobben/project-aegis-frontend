@@ -1,0 +1,12 @@
+// import seperate scss files
+@import "./reset.scss";
+@import "./font.scss";
+
+// import variables & Mixins
+@import "./variables.scss";
+@import "./mixins.scss";
+
+body {
+  background: $main-bg-dark-color;
+  position: relative;
+}
