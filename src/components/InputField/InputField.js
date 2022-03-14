@@ -6,15 +6,19 @@ function InputField({
   inputType,
   register,
   requiredInput,
+  classNameLabel,
+  classNameInput,
 }) {
   return (
-    <label htmlFor={inputId}>
+    <>
+      <label className={classNameLabel} htmlFor={inputId}></label>
       <input
+        className={classNameInput}
         type={inputType}
         placeholder={inputName}
         {...register(inputId, { required: requiredInput })}
       />
-    </label>
+    </>
   );
 }
 

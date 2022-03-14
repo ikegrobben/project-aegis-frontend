@@ -1,3 +1,108 @@
-header {
-  padding: 1.25em;
+@import "../../assets/css/variables.scss";
+@import "../../assets/css/mixins.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo {
+  margin: 1.25em;
+}
+
+.mobile-nav-toggle {
+  cursor: pointer;
+  align-self: center;
+  display: block;
+  position: absolute;
+  z-index: 9999;
+  background: url(../../assets/images/hamburger-menu-icon.png) no-repeat center
+    center;
+  border: 0px;
+  background-size: 2em;
+  width: 2em;
+  aspect-ratio: 1;
+  top: 1.5em;
+  right: 2em;
+
+  @include for-tablet {
+    display: none;
+  }
+
+  &[aria-expanded="true"] {
+    background: url(../../assets/images/x.png) no-repeat;
+    background-size: 2em;
+    width: 2em;
+    height: 2em;
+  }
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+
+  &__list {
+    position: fixed;
+    z-index: 900;
+    inset: 0 0 0 30%;
+    background: $sub-bg-dark-color;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    padding-top: 4em;
+    margin: 0;
+    list-style: none;
+    transform: translateX(100%);
+
+    &[data-visible="true"] {
+      transform: translateX(0%);
+    }
+
+    @include for-tablet {
+      position: static;
+      flex-direction: row;
+      inset: 0 0 0 0;
+      background: none;
+      padding-top: 0;
+      transform: none;
+      margin-right: 1.25em;
+    }
+
+    &-item {
+      @include for-tablet {
+        align-self: center;
+      }
+
+      & a {
+        color: white;
+        text-decoration: none;
+        font-size: 2em;
+
+        @include for-tablet {
+          font-size: 1em;
+        }
+      }
+
+      & .activated {
+        color: $main-blue;
+        position: relative;
+
+        &::before {
+          content: url(../../assets/images/play.png);
+          position: absolute;
+          top: 40%;
+          left: 0%;
+          width: 0.5em;
+          height: 0.5em;
+          transform: rotate(90deg);
+
+          @include for-tablet {
+            left: 50%;
+            top: 70%;
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  }
 }

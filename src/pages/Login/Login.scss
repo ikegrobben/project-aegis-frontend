@@ -8,7 +8,7 @@ section {
   height: calc(100vh - 7.75em);
 }
 
-#login-container {
+.login {
   width: 80%;
   max-width: 28em;
   background-color: $sub-bg-dark-color;
@@ -16,36 +16,32 @@ section {
   border-top: 0.125em solid $main-blue;
   padding: 2.5em 1.25em;
 
-  form {
+  &__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 2.5em;
 
-    label {
-      input {
-        width: 100%;
-        margin-bottom: 1.25em;
-        height: 2.5em;
-        border-radius: 0.5em;
-        border: 0px solid;
-        padding: 0.625em;
+    &--label {
+      color: white;
+    }
 
-        &:focus {
-          outline: 1px solid $main-blue;
-          border: 1px solid $main-blue;
-        }
+    &--input {
+      width: 100%;
+      margin-bottom: 1.25em;
+      height: 2.5em;
+      border-radius: 0.5em;
+      border: 0px solid;
+      padding: 0.625em;
+
+      &:focus {
+        outline: 1px solid $main-blue;
+        border: 1px solid $main-blue;
       }
     }
 
-    button {
-      background-color: $main-blue;
-      border-radius: 0.5em;
-      border: 0px solid;
-      height: 2.5em;
-      color: $font-color-light;
+    &--btn {
       align-self: flex-end;
-      padding: 0 1.25em;
     }
   }
 }
