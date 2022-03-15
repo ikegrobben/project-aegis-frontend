@@ -21,11 +21,16 @@ function App() {
   // Login check because there is no backend yet.
   const [isAuthenticated, toggleIsAuthenticated] = useState(false);
 
+  function logOut() {
+    console.log("logout");
+    toggleIsAuthenticated(!isAuthenticated);
+  }
+
   return (
     <>
       <BrowserRouter>
         <Navigation authenticated={isAuthenticated} />
-        <main id="main-content">
+        <main className="main-content">
           <Routes>
             <Route
               element={<LoginPrivateRoute authenticated={isAuthenticated} />}
@@ -41,8 +46,11 @@ function App() {
               />
             </Route>
             <Route element={<PrivateRoute authenticated={isAuthenticated} />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/shift-report" element={<ShiftReport />} />
+              <Route path="/" element={<Dashboard logOut={logOut} />} />
+              <Route
+                path="/shift-report"
+                element={<ShiftReport logOut={logOut} />}
+              />
             </Route>
           </Routes>
         </main>

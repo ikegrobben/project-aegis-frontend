@@ -76,6 +76,7 @@ function Navigation({ authenticated }) {
                 <NavLink to="/all-report">All Reports</NavLink>
               </li>
               <li className="header-user">
+                <p>Ike Grobben</p>
                 <img src={user} alt="Profile" />
               </li>
             </ul>

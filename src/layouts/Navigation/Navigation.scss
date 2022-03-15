@@ -4,6 +4,8 @@
 .header {
   display: flex;
   justify-content: space-between;
+  max-width: 90em;
+  margin: 0 auto;
 }
 
 .header-logo {
@@ -16,8 +18,7 @@
   display: block;
   position: absolute;
   z-index: 9999;
-  background: url(../../assets/images/hamburger-menu-icon.png) no-repeat center
-    center;
+  background: url(../../assets/images/hamb.svg) no-repeat center center;
   border: 0px;
   background-size: 2em;
   width: 2em;
@@ -25,12 +26,12 @@
   top: 1.5em;
   right: 2em;
 
-  @include for-tablet {
+  @include for-desktop {
     display: none;
   }
 
   &[aria-expanded="true"] {
-    background: url(../../assets/images/x.png) no-repeat;
+    background: url(../../assets/images/x.svg) no-repeat;
     background-size: 2em;
     width: 2em;
     height: 2em;
@@ -43,22 +44,24 @@
 
   &__list {
     position: fixed;
+    height: 100%;
     z-index: 900;
     inset: 0 0 0 30%;
     background: $sub-bg-dark-color;
     display: flex;
     flex-direction: column;
-    gap: 2.5em;
-    padding-top: 4em;
+    gap: 3.5em;
+    padding-top: 6em;
     margin: 0;
     list-style: none;
     transform: translateX(100%);
+    transition: transform 250ms ease-in;
 
     &[data-visible="true"] {
       transform: translateX(0%);
     }
 
-    @include for-tablet {
+    @include for-desktop {
       position: static;
       flex-direction: row;
       inset: 0 0 0 0;
@@ -69,16 +72,16 @@
     }
 
     &-item {
-      @include for-tablet {
+      @include for-desktop {
         align-self: center;
       }
 
       & a {
         color: white;
         text-decoration: none;
-        font-size: 2em;
+        font-size: 1.5em;
 
-        @include for-tablet {
+        @include for-desktop {
           font-size: 1em;
         }
       }
@@ -90,18 +93,45 @@
         &::before {
           content: url(../../assets/images/play.png);
           position: absolute;
-          top: 40%;
+          top: 45%;
           left: 0%;
           width: 0.5em;
           height: 0.5em;
           transform: rotate(90deg);
 
-          @include for-tablet {
+          @include for-desktop {
             left: 50%;
             top: 70%;
             transform: rotate(360deg);
           }
         }
+      }
+    }
+
+    & .header-user {
+      position: absolute;
+      bottom: 2em;
+      right: 2em;
+      display: flex;
+
+      @include for-desktop {
+        position: static;
+        bottom: auto;
+        right: auto;
+        align-self: center;
+      }
+
+      & p {
+        padding: 0.5em 0.8em;
+        margin-right: -8px;
+        height: 100%;
+        align-self: center;
+        background-color: $main-blue;
+        border-radius: 0.5em 0em 0em 0.5em;
+      }
+
+      & img {
+        vertical-align: baseline;
       }
     }
   }

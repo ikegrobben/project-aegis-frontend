@@ -16,3 +16,15 @@
   background-color: $main-blue;
   color: $font-color-light;
 }
+
+.btn--red {
+  background-color: $red-label-bg;
+  color: $red-label-bote;
+  border: 1px solid $red-label-bote;
+}
+
+.btn--light-blue {
+  background-color: $blue-label-bg;
+  color: $blue-label-bote;
+  border: 1px solid $blue-label-bote;
+}

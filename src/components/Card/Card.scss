@@ -1,0 +1,42 @@
+@import "../../assets/css/variables.scss";
+@import "../../assets/css/mixins.scss";
+
+// cards container in every page.
+.cards {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25em;
+  gap: 1.875em;
+  justify-content: space-between;
+
+  @include for-tablet {
+    flex-direction: row;
+  }
+}
+
+.card {
+  width: 100%;
+  padding: 1.25em;
+  background: $sub-bg-dark-color;
+  text-align: center;
+  border-radius: 1.25em;
+
+  @include for-tablet {
+    width: 100%;
+    max-width: 28.75em;
+    text-align: left;
+  }
+
+  & h3 {
+    font-size: 1.5em;
+  }
+
+  & .card__paragraph--big {
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  & .card__paragraph--small {
+    color: $grey-medium;
+  }
+}

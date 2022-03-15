@@ -25,7 +25,7 @@ function Login({ authenticated, toggleAuthenticated }) {
   }
 
   return (
-    <section aria-labelledby="login-title">
+    <section className="login-section" aria-labelledby="login-title">
       <div className="login">
         <h1 id="login-title" className="login__title title--white text-center">
           Login
