@@ -5,18 +5,25 @@ import Button from "../Button/Button";
 
 import "./ContentSubHeader.scss";
 
-function ContentSubHeader({ title, logOut }) {
+function ContentSubHeader({ title, hideBar }) {
+  function hideTopBar() {
+    if (hideBar === "yes") {
+      return "top-bar hide";
+    }
+    return "top-bar";
+  }
+
   return (
     <>
       <section className="content-sub-header">
         <h2 className="content-sub-header__title">{title}</h2>
         <Button
-          name="Create new item"
+          name="New item"
           type="button"
           classNameButton="btn btn--light-blue"
         />
       </section>
-      <div className="top-bar">
+      <div className={hideTopBar()}>
         <div className="top-bar__date-time">
           <span>Date & Time</span>
         </div>{" "}

@@ -13,13 +13,14 @@ import Footer from "./layouts/Footer/Footer";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ShiftReport from "./pages/ShiftReport/ShiftReport";
+import MonthlyReport from "./pages/MonthlyReport/MonthlyReport";
 
 // Import scss files
 import "./assets/css/App.scss";
 
 function App() {
   // Login check because there is no backend yet.
-  const [isAuthenticated, toggleIsAuthenticated] = useState(false);
+  const [isAuthenticated, toggleIsAuthenticated] = useState(true);
 
   function logOut() {
     console.log("logout");
@@ -50,6 +51,10 @@ function App() {
               <Route
                 path="/shift-report"
                 element={<ShiftReport logOut={logOut} />}
+              />
+              <Route
+                path="/monthly-report"
+                element={<MonthlyReport logOut={logOut} />}
               />
             </Route>
           </Routes>

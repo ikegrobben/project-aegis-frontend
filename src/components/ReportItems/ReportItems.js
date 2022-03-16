@@ -3,12 +3,44 @@ import React from "react";
 // Import css
 import "./ReportItems.scss";
 
-// Temp import for data
-import items from "../../services/report.json";
-
-function ReportItems() {
+function ReportItems({ reportObject, filterType, filterBy }) {
   // Creates new Array with reports with status open
-  const reportItems = items.filter((item) => item.Status === "Open");
+
+  const reportItems = filterReport(reportObject);
+
+  function filterReport(filterArray) {
+    const arrayFilter = filterArray.filter((item) => {
+      // Variables for date checks
+      const dateToday = new Date(filterBy);
+      const dateItem = new Date(item.date);
+
+      switch (filterType) {
+        case "filterOnStatus":
+          if (item.Status === filterBy) {
+            return true;
+          }
+          break;
+        case "filterOnDay":
+          if (
+            dateToday.getDate() === dateItem.getDate() &&
+            dateToday.getMonth() === dateItem.getMonth() &&
+            dateToday.getFullYear() === dateItem.getFullYear()
+          ) {
+            return true;
+          }
+          break;
+        case "filterOnMonth":
+          if (dateToday.getMonth() === dateItem.getMonth()) {
+            return true;
+          }
+          break;
+
+        default:
+      }
+      return false;
+    });
+    return arrayFilter;
+  }
 
   // Sort items on date (Newest date first)
   reportItems.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -36,11 +68,12 @@ function ReportItems() {
           </div>
           <div className="report-item__report">
             <p className="report-item__paragraph">{reportItem.content}</p>
-            <span className="report-item__location">{reportItem.location}</span>
-            <span className="report-item__category">{reportItem.category}</span>
-            <span className="report-item__images">{reportItem.images}</span>
-            <span className="report-item__creator">{reportItem.creator}</span>
-            {console.log(reportItem)}
+            <ul>
+              <li className="report-item__location">{reportItem.location}</li>
+              <li className="report-item__category">{reportItem.category}</li>
+              <li className="report-item__images">{reportItem.images}</li>
+              <li className="report-item__creator">{reportItem.creator}</li>
+            </ul>
           </div>
           <div className="report-item__status">
             <span className="green">{reportItem.Status}</span>

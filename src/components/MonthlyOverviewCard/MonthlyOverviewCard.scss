@@ -1,0 +1,29 @@
+@import "../../assets/css/variables.scss";
+@import "../../assets/css/mixins.scss";
+
+.overview-card {
+  width: 100%;
+  padding: 1.25em;
+  background: $sub-bg-dark-color;
+  text-align: center;
+  border-radius: 1.25em;
+
+  display: flex;
+  flex-direction: column;
+
+  @include for-tablet {
+    width: 100%;
+    max-width: 13.54em;
+    min-height: 15.6em;
+    justify-content: space-around;
+  }
+
+  & h3 {
+    font-size: 1.5em;
+  }
+
+  &__paragraph--big {
+    font-size: 3em;
+    font-weight: bold;
+  }
+}

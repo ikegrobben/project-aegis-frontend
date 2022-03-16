@@ -1,10 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import ReportItems from "../../components/ReportItems/ReportItems";
+import Button from "../../components/Button/Button";
+
+// Import scss
+import "./Dashboard.scss";
+
+// Temp import for data
+import items from "../../services/report.json";
 
 function Dashboard({ logOut }) {
   return (
@@ -29,7 +37,27 @@ function Dashboard({ logOut }) {
         />
       </div>
       <ContentSubHeader title="All open reports" />
-      <ReportItems />
+      <ReportItems
+        reportObject={items}
+        filterType="filterOnStatus"
+        filterBy="Open"
+      />
+      <div className="dashboard__buttons">
+        <Link to="/monthly-report">
+          <Button
+            name="See Monthly report"
+            type="button"
+            classNameButton="btn btn--light-blue"
+          />
+        </Link>
+        <Link to="/shift-report">
+          <Button
+            name="See todays report"
+            type="button"
+            classNameButton="btn btn--light-blue"
+          />
+        </Link>
+      </div>
     </>
   );
 }

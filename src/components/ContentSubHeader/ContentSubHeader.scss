@@ -3,7 +3,7 @@
 @import "../../assets/css/mixins.scss";
 
 .content-sub-header {
-  padding: 2.5em 1.25em 1.25em;
+  padding: 2.5em 0em 1.25em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,13 +19,12 @@
   @include for-desktop {
     background-color: $sub-bg-dark-color;
     display: flex;
-    margin: 0em 1.25em;
     padding: 0.56em 1.25em;
     border-radius: 0.5em;
   }
 
   &__date-time {
-    width: 12em;
+    min-width: 12em;
   }
 
   &__report {
@@ -33,15 +32,19 @@
   }
 
   &__status {
-    width: 10em;
+    min-width: 10em;
   }
 
   &__comments {
-    width: 5.2em;
+    min-width: 5.2em;
   }
 
   & span {
     color: $font-color-light;
     width: 100%;
   }
+}
+
+.hide {
+  display: none;
 }

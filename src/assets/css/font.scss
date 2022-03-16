@@ -24,6 +24,7 @@ h1 {
 h2 {
   font-size: $mobile-font-size-h2;
   color: $font-color-light;
+  font-weight: normal;
 
   @include for-tablet {
     font-size: $font-size-h2;

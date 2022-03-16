@@ -3,15 +3,44 @@
 
 .report-item {
   display: flex;
-  margin: 0em 1.25em;
-  padding: 1em 1.25em;
+  flex-direction: column;
+  padding: 1em 0em;
+
+  @include for-desktop {
+    margin: 0em 1.25em;
+
+    min-width: 19em;
+  }
+
+  @include for-desktop {
+    flex-direction: row;
+  }
 
   &__date {
-    width: 12em;
+    width: fit-content;
+    padding: 0.2em 0.92em;
+    border-radius: 0.5em;
+    background-color: $sub-bg-dark-color;
+
+    @include for-desktop {
+      min-width: 12em;
+      padding: 0;
+      background-color: $main-bg-dark-color;
+    }
+
+    &::before {
+      content: "Date & Time: ";
+      color: $font-color-light;
+      margin-right: 10px;
+      @include for-desktop {
+        content: none;
+      }
+    }
 
     & span {
       border-radius: 0.5em;
       padding: 0em 0.93em;
+      display: inline-block;
     }
 
     & .blue {
@@ -28,33 +57,148 @@
   }
 
   &__report {
-    width: 58em;
+    margin-top: 4em;
+
+    @include for-tablet {
+      margin-top: 1em;
+    }
+
+    @include for-desktop {
+      margin-top: 0;
+    }
+    &::before {
+      display: block;
+      width: fit-content;
+      content: "Report Item:";
+      color: $font-color-light;
+      padding: 0.2em 0.92em;
+      border-radius: 0.5em;
+      background-color: $sub-bg-dark-color;
+
+      @include for-desktop {
+        content: none;
+      }
+    }
+    @include for-desktop {
+      width: 58em;
+    }
 
     .report-item__paragraph {
-      margin-top: -0.3em;
+      margin-top: 1em;
+
+      @include for-desktop {
+        margin-top: -0.3em;
+      }
     }
 
-    & span {
-      padding: 0em 0.93em;
-    }
+    & ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      margin-top: 0.5em;
 
-    .report-item__location {
-      color: $main-blue;
-      padding: 0em 0.93em 0em 0em;
-    }
-    .report-item__category {
-      color: $main-blue;
-    }
-    .report-item__images {
-      color: $main-blue;
-    }
-    .report-item__creator {
-      color: $main-blue;
+      @include for-desktop {
+      }
+
+      & li {
+        padding: 0em 0.93em;
+      }
+
+      .report-item__location {
+        color: $main-blue;
+        padding: 0em;
+        position: relative;
+        margin-left: 1.5em;
+
+        &::before {
+          position: absolute;
+          width: 0.5em;
+          height: 0.5em;
+          left: -1.5em;
+          top: 0.1em;
+          content: url(../../assets/images/location.svg);
+        }
+      }
+      .report-item__category {
+        color: $main-blue;
+        position: relative;
+        margin-left: 1.5em;
+
+        &::before {
+          position: absolute;
+          width: 0.5em;
+          height: 0.5em;
+          left: -0.7em;
+          top: 0.1em;
+          content: url(../../assets/images/category.svg);
+        }
+      }
+      .report-item__images {
+        color: $main-blue;
+        flex-grow: 2;
+        position: relative;
+        margin-left: 0.7em;
+
+        &::before {
+          position: absolute;
+          width: 0.5em;
+          height: 0.5em;
+          left: -0.7em;
+          top: 0.1em;
+          content: url(../../assets/images/images.svg);
+        }
+      }
+      .report-item__creator {
+        color: $main-blue;
+        text-align: start;
+        padding-right: 2em;
+        position: relative;
+
+        @include for-tablet {
+          text-align: end;
+        }
+
+        &::before {
+          position: absolute;
+          width: 0.5em;
+          height: 0.5em;
+          left: -0.7em;
+          top: 0.1em;
+          content: url(../../assets/images/location.svg);
+        }
+      }
     }
   }
 
   &__status {
-    width: 10em;
+    position: absolute;
+    margin-top: 3em;
+    padding: 0.2em 0.92em;
+    border-radius: 0.5em;
+    background-color: $sub-bg-dark-color;
+    width: fit-content;
+
+    @include for-tablet {
+      right: 1.25em;
+    }
+
+    @include for-desktop {
+      padding: 0;
+      position: static;
+      right: 0;
+      min-width: 10em;
+      margin-top: 0;
+      background-color: $main-bg-dark-color;
+    }
+
+    &::before {
+      content: "Status: ";
+      color: $font-color-light;
+
+      @include for-desktop {
+        content: none;
+      }
+    }
 
     & span {
       border-radius: 0.5em;
@@ -75,8 +219,29 @@
   }
 
   &__comments {
-    width: 5.2em;
-    color: white;
+    width: fit-content;
+    color: $font-color-light;
+    padding: 0.2em 0.92em;
+    border-radius: 0.5em;
+    background-color: $sub-bg-dark-color;
+    margin-top: 1em;
+
+    @include for-desktop {
+      padding: 0;
+      min-width: 5.2em;
+      background-color: $main-bg-dark-color;
+      margin-top: 0;
+    }
+
+    &::before {
+      content: "Comments: ";
+
+      color: $font-color-light;
+
+      @include for-desktop {
+        content: none;
+      }
+    }
   }
 }
 

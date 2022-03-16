@@ -5,12 +5,14 @@
 .cards {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25em;
   gap: 1.875em;
   justify-content: space-between;
 
   @include for-tablet {
     flex-direction: row;
+  }
+
+  @include for-desktop {
   }
 }
 

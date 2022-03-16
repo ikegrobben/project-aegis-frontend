@@ -1,7 +1,7 @@
 @import "../../assets/css/variables.scss";
 
 footer {
-  position: absolute;
+  position: sticky;
   background: $sub-bg-dark-color;
   bottom: 0em;
   width: 100%;

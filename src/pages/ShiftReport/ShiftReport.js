@@ -4,6 +4,10 @@ import React from "react";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
+import ReportItems from "../../components/ReportItems/ReportItems";
+
+// Temp import for data
+import items from "../../services/report.json";
 
 function ShiftReport({ logOut }) {
   return (
@@ -28,6 +32,11 @@ function ShiftReport({ logOut }) {
         />
       </div>
       <ContentSubHeader title="Reports 00:00 - 23:59" />
+      <ReportItems
+        reportObject={items}
+        filterType="filterOnDay"
+        filterBy={new Date()}
+      />
     </>
   );
 }
