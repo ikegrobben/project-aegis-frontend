@@ -70,7 +70,14 @@ function Navigation({ authenticated }) {
                 </NavLink>
               </li>
               <li className="header-nav__list-item">
-                <NavLink to="/monthly-report">Monthly Report</NavLink>
+                <NavLink
+                  to="/monthly-report"
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? " activated" : "")
+                  }
+                >
+                  Monthly Report
+                </NavLink>
               </li>
               <li className="header-nav__list-item">
                 <NavLink to="/all-report">All Reports</NavLink>

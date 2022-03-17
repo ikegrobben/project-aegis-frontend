@@ -8,6 +8,9 @@ import { statusCheck } from "../../Logic/StatusCheck";
 // Import css
 import "./ReportItems.scss";
 
+// Import img
+import userImg from "../../assets/images/user.svg";
+
 function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
   // Filter the Array of objects
   const reportItems = FilterItems(reportObject, filterType, filterBy);
@@ -28,8 +31,14 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
             <ul>
               <li className="report-item__location">{reportItem.location}</li>
               <li className="report-item__category">{reportItem.category}</li>
-              <li className="report-item__images">{reportItem.images}</li>
-              <li className="report-item__creator">{reportItem.creator}</li>
+
+              {reportItem.images > 0 && (
+                <li className="report-item__images">{reportItem.images}</li>
+              )}
+
+              <li className="report-item__creator">
+                <img src={userImg} alt="User" /> {reportItem.creator}
+              </li>
             </ul>
           </div>
           <div className="report-item__status">

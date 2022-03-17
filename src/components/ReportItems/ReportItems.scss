@@ -142,7 +142,6 @@
       }
       .report-item__images {
         color: $main-blue;
-        flex-grow: 2;
         position: relative;
         margin-left: 0.7em;
 
@@ -157,21 +156,18 @@
       }
       .report-item__creator {
         color: $main-blue;
-        text-align: start;
         padding-right: 2em;
         position: relative;
+        flex-grow: 2;
+        display: flex;
+        justify-content: end;
+
+        & img {
+          margin-right: 0.5em;
+        }
 
         @include for-tablet {
           text-align: end;
-        }
-
-        &::before {
-          position: absolute;
-          width: 0.5em;
-          height: 0.5em;
-          left: -0.7em;
-          top: 0.1em;
-          content: url(../../assets/images/location.svg);
         }
       }
     }
