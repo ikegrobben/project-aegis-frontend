@@ -40,7 +40,9 @@ function Dashboard({ logOut }) {
       <ReportItems
         reportObject={items}
         filterType="filterOnStatus"
-        filterBy="Open"
+        filterBy="open"
+        sortType="date"
+        sortBy="latest first"
       />
       <div className="dashboard__buttons">
         <Link to="/monthly-report">

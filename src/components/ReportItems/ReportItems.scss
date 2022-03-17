@@ -85,9 +85,16 @@
 
     .report-item__paragraph {
       margin-top: 1em;
+      line-height: 2em;
 
       @include for-desktop {
         margin-top: -0.3em;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 1.25em;
       }
     }
 

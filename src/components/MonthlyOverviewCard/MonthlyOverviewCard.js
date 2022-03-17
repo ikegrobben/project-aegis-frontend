@@ -2,18 +2,11 @@ import React from "react";
 
 import "./MonthlyOverviewCard.scss";
 
-// Temp import for data
-import items from "../../services/report.json";
+// Import Logic
+import { FilterItems } from "../../Logic/FilterSortItems";
 
-function MonthlyOverviewCard({ boxSubject, boxAmountNumber, filterBy }) {
-  const arrayFilter = items.filter((item) => {
-    const dateToday = new Date(filterBy);
-    const dateItem = new Date(item.date);
-
-    if (dateToday.getMonth() === dateItem.getMonth()) {
-      return true;
-    }
-  });
+function MonthlyOverviewCard({ reportObject, filterType, filterBy }) {
+  const arrayFilter = FilterItems(reportObject, filterType, filterBy);
 
   const categoryArray = arrayFilter.map((c) => ({ category: c.category }));
 

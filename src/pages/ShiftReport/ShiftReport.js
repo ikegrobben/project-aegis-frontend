@@ -36,6 +36,8 @@ function ShiftReport({ logOut }) {
         reportObject={items}
         filterType="filterOnDay"
         filterBy={new Date()}
+        sortType="date"
+        sortBy="latest first"
       />
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./MonthlyReport.scss";
 
@@ -8,9 +8,16 @@ import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import MonthlyOverviewCard from "../../components/MonthlyOverviewCard/MonthlyOverviewCard";
 
+// Temp import for data
+import items from "../../services/report.json";
+
 function MonthlyReport({ logOut }) {
   const monthDate = new Date();
-  monthDate.setMonth(1 + 1);
+  const initialDate = monthDate.getMonth();
+
+  const [getMonth, setNewMonth] = useState(initialDate);
+
+  monthDate.setMonth(getMonth);
   const selectedMonth = monthDate.toLocaleString("default", { month: "long" });
   const title = "Monthly report from " + selectedMonth;
   return (
@@ -34,9 +41,17 @@ function MonthlyReport({ logOut }) {
           boxInfo="That are 13 more reports then last month!"
         />
       </div>
-      <ContentSubHeader title="All open reports" hideBar="yes" />
+      <ContentSubHeader
+        title="All open reports"
+        hideBar="yes"
+        setNewMonth={setNewMonth}
+      />
       <div className="cards monthly-report__cards">
-        <MonthlyOverviewCard filterBy={monthDate} />
+        <MonthlyOverviewCard
+          reportObject={items}
+          filterType="filterOnMonth"
+          filterBy={monthDate}
+        />
       </div>
     </>
   );

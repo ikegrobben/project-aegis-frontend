@@ -1,11 +1,17 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 // Import components
 import Button from "../Button/Button";
 
 import "./ContentSubHeader.scss";
 
-function ContentSubHeader({ title, hideBar }) {
+function ContentSubHeader({ title, hideBar, setNewMonth }) {
+  const { register, handleSubmit } = useForm();
+
+  function setAMonth(data) {
+    setNewMonth(data.Month);
+  }
   function hideTopBar() {
     if (hideBar === "yes") {
       return "top-bar hide";
@@ -17,6 +23,14 @@ function ContentSubHeader({ title, hideBar }) {
     <>
       <section className="content-sub-header">
         <h2 className="content-sub-header__title">{title}</h2>
+        <form onChange={handleSubmit(setAMonth)}>
+          <select {...register("Month", { required: true })}>
+            <option value="">Choose a month</option>
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+          </select>
+        </form>
         <Button
           name="New item"
           type="button"
