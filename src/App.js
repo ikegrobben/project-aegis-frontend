@@ -14,6 +14,8 @@ import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ShiftReport from "./pages/ShiftReport/ShiftReport";
 import MonthlyReport from "./pages/MonthlyReport/MonthlyReport";
+import AllReports from "./pages/AllReports/AllReports";
+import ReportItem from "./pages/ReportItem/ReportItem";
 
 // Import scss files
 import "./assets/css/App.scss";
@@ -55,6 +57,14 @@ function App() {
               <Route
                 path="/monthly-report"
                 element={<MonthlyReport logOut={logOut} />}
+              />
+              <Route
+                path="/all-reports"
+                element={<AllReports logOut={logOut} />}
+              />
+              <Route
+                path="/report-item/:id"
+                element={<ReportItem logOut={logOut} />}
               />
             </Route>
           </Routes>

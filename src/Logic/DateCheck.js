@@ -11,3 +11,10 @@ export function dateToday(day) {
 
   return <span className="grey">{day}</span>;
 }
+
+export function getReportDate(day) {
+  const today = new Date(day);
+  const selectedDay = today.toLocaleString("default", { month: "long" });
+
+  return selectedDay + " " + today.getDay() + " " + today.getFullYear();
+}

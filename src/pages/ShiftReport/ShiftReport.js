@@ -6,13 +6,20 @@ import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import ReportItems from "../../components/ReportItems/ReportItems";
 
+// Import logic
+
 // Temp import for data
 import items from "../../services/report.json";
+import { getReportDate } from "../../logic/DateCheck";
 
 function ShiftReport({ logOut }) {
+  function reportTitleDate() {
+    const date = getReportDate(new Date());
+    return "Report " + date;
+  }
   return (
     <>
-      <ContentHeader title="Report March 15 2022" logOut={logOut} />
+      <ContentHeader title={reportTitleDate()} logOut={logOut} />
       <h2 className="sr-only">Statistics</h2>
       <div className="cards">
         <Card

@@ -3,7 +3,7 @@ import React from "react";
 import "./MonthlyOverviewCard.scss";
 
 // Import Logic
-import { FilterItems } from "../../Logic/FilterSortItems";
+import { FilterItems } from "../../logic/FilterSortItems";
 
 function MonthlyOverviewCard({ reportObject, filterType, filterBy }) {
   const arrayFilter = FilterItems(reportObject, filterType, filterBy);

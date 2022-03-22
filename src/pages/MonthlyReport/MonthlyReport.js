@@ -33,7 +33,7 @@ function MonthlyReport({ logOut }) {
         <Card
           boxSubject="Open reports this month"
           boxAmountNumber="7"
-          boxInfo="Pay ettentions to open items."
+          boxInfo="Pay attentions to open items."
         />
         <Card
           boxSubject="Closed reports this month"

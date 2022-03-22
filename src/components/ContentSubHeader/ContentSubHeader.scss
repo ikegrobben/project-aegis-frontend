@@ -11,6 +11,28 @@
   &__title {
     font-weight: normal;
   }
+
+  & .container-button-select {
+    display: flex;
+    gap: 1.25em;
+
+    & form {
+      align-self: center;
+
+      & select {
+        height: 2.5em;
+        border-radius: 0.5em;
+        background: white;
+        padding-left: 0.5em;
+        border: 1px solid $main-blue;
+        color: $main-blue;
+
+        & select {
+          border-radius: 2em;
+        }
+      }
+    }
+  }
 }
 
 .top-bar {

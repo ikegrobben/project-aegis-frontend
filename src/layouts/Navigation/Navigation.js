@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navigation.scss";
 
 // Import images
-import logo from "../../assets/images/logodarktheme.png";
+import logo from "../../assets/images/logo-text.png";
 import user from "../../assets/images/User.png";
 
 function Navigation({ authenticated }) {
