@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Temp import for data
 import items from "../../services/report.json";
@@ -10,10 +10,13 @@ function ReportItem() {
     return reportItem.id === id;
   });
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>{fullReportItem.creator}</h1>
       <p>{fullReportItem.content}</p>
+      <button onClick={() => navigate(-1)}>go back</button>
     </div>
   );
 }
