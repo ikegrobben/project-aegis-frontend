@@ -1,0 +1,20 @@
+@import "../../assets/css/variables.scss";
+@import "../../assets/css/mixins.scss";
+
+.report-item__cards {
+  & .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & h3 {
+      font-size: 2em;
+    }
+
+    &__paragraph--big {
+      margin-top: 0.2em;
+      font-size: 1.5em;
+      color: $main-blue;
+    }
+  }
+}
