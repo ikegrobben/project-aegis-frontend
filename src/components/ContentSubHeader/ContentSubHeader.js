@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 // Import components
 import Button from "../Button/Button";
 
-import "./ContentSubHeader.scss";
+// import scss file
+import "./_contentsubheader.scss";
 
 function ContentSubHeader({ title, hideBar, setNewMonth }) {
   const { register, handleSubmit } = useForm();

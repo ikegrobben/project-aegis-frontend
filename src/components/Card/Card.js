@@ -1,5 +1,7 @@
 import React from "react";
-import "./Card.scss";
+
+// Import scss
+import "./_card.scss";
 
 function Card({ boxSubject, boxAmountNumber, boxInfo }) {
   return (

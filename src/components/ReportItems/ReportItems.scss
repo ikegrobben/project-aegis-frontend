@@ -1,5 +1,4 @@
-@import "../../assets/css/variables.scss";
-@import "../../assets/css/mixins.scss";
+@use "../../assets/sass/sass-utils/" as *;
 
 .report-item {
   display: flex;
@@ -162,7 +161,7 @@
         position: relative;
         flex-grow: 2;
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
 
         & img {
           margin-right: 0.5em;

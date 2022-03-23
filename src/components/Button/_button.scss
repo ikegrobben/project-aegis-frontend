@@ -1,5 +1,5 @@
 // Import variables
-@import "../../assets/css/variables.scss";
+@use "../../assets/sass/sass-utils/" as *;
 
 .btn {
   border-radius: 0.5em;

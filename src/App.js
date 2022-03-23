@@ -18,7 +18,7 @@ import AllReports from "./pages/AllReports/AllReports";
 import ReportItem from "./pages/ReportItem/ReportItem";
 
 // Import scss files
-import "./assets/css/App.scss";
+import "./App.scss";
 
 function App() {
   // Login check because there is no backend yet.

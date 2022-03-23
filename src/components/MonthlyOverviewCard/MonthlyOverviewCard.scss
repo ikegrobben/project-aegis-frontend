@@ -1,5 +1,4 @@
-@import "../../assets/css/variables.scss";
-@import "../../assets/css/mixins.scss";
+@use "../../assets/sass/sass-utils/" as *;
 
 .overview-card {
   width: 100%;

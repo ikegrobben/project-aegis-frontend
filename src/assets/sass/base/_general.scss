@@ -1,10 +1,4 @@
-// import seperate scss files
-@import "./reset.scss";
-@import "./font.scss";
-
-// import variables & Mixins
-@import "./variables.scss";
-@import "./mixins.scss";
+@use "../sass-utils/" as *;
 
 body {
   background: $main-bg-dark-color;
@@ -26,7 +20,7 @@ body {
 }
 
 main {
-  min-height: calc(100vh - 124px);
+  min-height: calc(100vh - 7.75em);
   max-width: 90em;
   margin: 0 auto;
   padding: 0em 1.25em;

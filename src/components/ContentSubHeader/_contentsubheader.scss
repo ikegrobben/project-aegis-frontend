@@ -1,6 +1,4 @@
-// Import variables
-@import "../../assets/css/variables.scss";
-@import "../../assets/css/mixins.scss";
+@use "../../assets/sass/sass-utils/" as *;
 
 .content-sub-header {
   padding: 2.5em 0em 1.25em;

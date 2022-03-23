@@ -1,8 +1,10 @@
 import React from "react";
-import "./ContentHeader.scss";
 
 // Import components
 import Button from "../Button/Button";
+
+// Import scss
+import "./_contentheader.scss";
 
 function ContentHeader({ title, logOut }) {
   return (
