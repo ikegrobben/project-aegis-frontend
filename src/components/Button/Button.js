@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import scss
-import "./_button.scss";
+import "./button.scss";
 
 function Button({ name, type, classNameButton, clickFunction }) {
   return (

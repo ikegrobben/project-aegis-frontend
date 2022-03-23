@@ -1,5 +1,4 @@
-@use "../../assets/sass/sass-utils/variables";
-@use "../../assets/sass/sass-utils/mixins";
+@use "../../assets/sass/sass-utils/" as *;
 
 .header {
   display: flex;
@@ -26,7 +25,7 @@
   top: 1.5em;
   right: 2em;
 
-  @include mixins.for-desktop {
+  @include for-desktop {
     display: none;
   }
 
@@ -47,7 +46,7 @@
     height: 100%;
     z-index: 900;
     inset: 0 0 0 60%;
-    background: variables.$sub-bg-dark-color;
+    background: $sub-bg-dark-color;
     display: flex;
     flex-direction: column;
     gap: 3.5em;
@@ -61,7 +60,7 @@
       transform: translateX(0%);
     }
 
-    @include mixins.for-desktop {
+    @include for-desktop {
       position: static;
       flex-direction: row;
       inset: 0 0 0 0;
@@ -72,7 +71,7 @@
     }
 
     &-item {
-      @include mixins.for-desktop {
+      @include for-desktop {
         align-self: center;
       }
 
@@ -81,13 +80,13 @@
         text-decoration: none;
         font-size: 1.5em;
 
-        @include mixins.for-desktop {
+        @include for-desktop {
           font-size: 1em;
         }
       }
 
       & .activated {
-        color: variables.$main-blue;
+        color: $main-blue;
         position: relative;
 
         &::before {
@@ -99,7 +98,7 @@
           height: 0.5em;
           transform: rotate(90deg);
 
-          @include mixins.for-desktop {
+          @include for-desktop {
             left: 50%;
             top: 70%;
             transform: rotate(360deg);
@@ -114,7 +113,7 @@
       right: 2em;
       display: flex;
 
-      @include mixins.for-desktop {
+      @include for-desktop {
         position: static;
         bottom: auto;
         right: auto;
@@ -126,7 +125,7 @@
         margin-right: -8px;
         height: 100%;
         align-self: center;
-        background-color: variables.$main-blue;
+        background-color: $main-blue;
         border-radius: 0.5em 0em 0em 0.5em;
       }
 

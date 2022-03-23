@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Import scss
-import "./_monthlyreport.scss";
+import "./monthlyreport.scss";
 
 // Import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";

@@ -6,8 +6,6 @@ import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import ReportItems from "../../components/ReportItems/ReportItems";
 
-// Import logic
-
 // Temp import for data
 import items from "../../services/report.json";
 import { getReportDate } from "../../logic/DateCheck";

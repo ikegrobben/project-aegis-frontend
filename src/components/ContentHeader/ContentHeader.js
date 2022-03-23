@@ -4,7 +4,7 @@ import React from "react";
 import Button from "../Button/Button";
 
 // Import scss
-import "./_contentheader.scss";
+import "./contentheader.scss";
 
 function ContentHeader({ title, logOut }) {
   return (

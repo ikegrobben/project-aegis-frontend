@@ -1,6 +1,7 @@
 import React from "react";
 
-import "./MonthlyOverviewCard.scss";
+// Import scss
+import "./monthlyoverviewcard.scss";
 
 // Import Logic
 import { FilterItems } from "../../logic/FilterSortItems";

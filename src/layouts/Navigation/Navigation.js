@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 // Import scss
-import "./Navigation.scss";
+import "./navigation.scss";
 
 // Import images
 import logo from "../../assets/images/logo-text.png";

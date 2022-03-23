@@ -7,7 +7,7 @@ import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
 
 // Import scss
-import "./Login.scss";
+import "./login.scss";
 
 // Function
 function Login({ authenticated, toggleAuthenticated }) {

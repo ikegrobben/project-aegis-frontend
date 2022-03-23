@@ -6,7 +6,7 @@ import Card from "../../components/Card/Card";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 
 // import scss
-import "./ReportItem.scss";
+import "./reportitem.scss";
 
 // Temp import for data
 import items from "../../services/report.json";

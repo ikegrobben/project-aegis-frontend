@@ -6,7 +6,7 @@ import { dateToday } from "../../logic/DateCheck";
 import { statusCheck } from "../../logic/StatusCheck";
 
 // Import css
-import "./ReportItems.scss";
+import "./reportitems.scss";
 
 // Import img
 import userImg from "../../assets/images/user.svg";

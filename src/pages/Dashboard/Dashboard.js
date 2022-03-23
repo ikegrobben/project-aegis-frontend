@@ -9,7 +9,7 @@ import ReportItems from "../../components/ReportItems/ReportItems";
 import Button from "../../components/Button/Button";
 
 // Import scss
-import "./Dashboard.scss";
+import "./dashboard.scss";
 
 // Temp import for data
 import items from "../../services/report.json";
