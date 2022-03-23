@@ -2,11 +2,10 @@
 
 body {
   background: $main-bg-dark-color;
-  position: relative;
-  overflow: hidden;
-  overflow-y: auto;
+  font-family: "Open sans", sans-serif;
 }
 
+// Class for screen Readers
 .sr-only {
   position: absolute;
   width: 1px;
