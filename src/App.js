@@ -16,12 +16,16 @@ import ShiftReport from "./pages/ShiftReport/ShiftReport";
 import MonthlyReport from "./pages/MonthlyReport/MonthlyReport";
 import AllReports from "./pages/AllReports/AllReports";
 import ReportItem from "./pages/ReportItem/ReportItem";
+import EditReportItem from "./pages/EditReportItem/EditReportItem";
+import NewReportItem from "./pages/NewReportItem/NewReportItem";
 
 // Import scss files
 import "./App.scss";
 
 function App() {
-  // Login check because there is no backend yet.
+  // TODO - Login functionality with backend
+  // * - Login check because there is no backend yet.
+
   const [isAuthenticated, toggleIsAuthenticated] = useState(true);
 
   function logOut() {
@@ -63,8 +67,16 @@ function App() {
                 element={<AllReports logOut={logOut} />}
               />
               <Route
+                path="/create-report-item"
+                element={<NewReportItem logOut={logOut} />}
+              />
+              <Route
                 path="/report-item/:id"
                 element={<ReportItem logOut={logOut} />}
+              />
+              <Route
+                path="/report-item/:id/edit"
+                element={<EditReportItem logOut={logOut} />}
               />
             </Route>
           </Routes>

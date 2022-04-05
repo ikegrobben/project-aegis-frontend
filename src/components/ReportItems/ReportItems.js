@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Import Logic
 import { FilterItems, SortItems } from "../../logic/FilterSortItems";
@@ -13,10 +13,10 @@ import userImg from "../../assets/images/user.svg";
 import { Link } from "react-router-dom";
 
 function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
-  // Filter the Array of objects
+  // * - Filter the Array of objects
   const reportItems = FilterItems(reportObject, filterType, filterBy);
 
-  // Sort items
+  // * - Sort items
   SortItems(reportItems, sortType, sortBy);
 
   return reportItems.map((reportItem) => {

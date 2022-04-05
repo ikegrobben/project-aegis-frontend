@@ -13,12 +13,15 @@ import MonthlyOverviewCard from "../../components/MonthlyOverviewCard/MonthlyOve
 import items from "../../services/report.json";
 
 function MonthlyReport({ logOut }) {
+  // ? - Can we shorten this method
   const monthDate = new Date();
   const initialDate = monthDate.getMonth();
 
   const [getMonth, setNewMonth] = useState(initialDate);
 
   monthDate.setMonth(getMonth);
+
+  // TODO - create a seperate function for title with month string
   const selectedMonth = monthDate.toLocaleString("default", { month: "long" });
   const title = "Monthly report from " + selectedMonth;
   return (
@@ -43,7 +46,7 @@ function MonthlyReport({ logOut }) {
         />
       </div>
       <ContentSubHeader
-        title="All open reports"
+        title="Security Items"
         hideBar="yes"
         setNewMonth={setNewMonth}
       />

@@ -1,3 +1,4 @@
+// * Status check for status labels
 export function statusCheck(status) {
   const currentStatus = status;
   const open = "open";

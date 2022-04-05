@@ -36,7 +36,7 @@ function Dashboard({ logOut }) {
           boxInfo="That are 13 more reports then last month!"
         />
       </div>
-      <ContentSubHeader title="All open reports" />
+      <ContentSubHeader title="All open reports" display="hide" />
       <ReportItems
         reportObject={items}
         filterType="filterOnStatus"

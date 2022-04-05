@@ -47,13 +47,26 @@ span {
   justify-content: center;
 }
 
-.images {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5em;
+textarea {
+  margin: 1.25em 0em;
+  width: 100%;
+  min-height: 20em;
+}
 
-  & .report-image {
-    width: 20em;
-    height: 20em;
-  }
+input[type="file"] {
+  color: #fff;
+}
+
+.report-dropdown {
+  border-radius: 0.625em;
+  font-weight: normal;
+  font-size: 16px;
+  padding: 0.3125em;
+  border: 1px solid $main-blue;
+}
+
+option {
+  border-radius: 1em;
+  font-weight: normal;
+  font-size: 1em;
 }

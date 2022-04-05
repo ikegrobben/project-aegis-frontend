@@ -1,6 +1,6 @@
+// * Filter array of objects based on filterType
 export function FilterItems(filterArray, filterType, filterBy) {
   const arrayFilter = filterArray.filter((item) => {
-    // Variables for date checks
     const dateToday = new Date(filterBy);
     const dateItem = new Date(item.date);
 
@@ -32,8 +32,7 @@ export function FilterItems(filterArray, filterType, filterBy) {
   return arrayFilter;
 }
 
-// Sort items
-
+// * Sort items based on sortType
 export function SortItems(sortArray, sortType, sortBy) {
   if (sortType === "date" && sortBy === "latest first") {
     sortArray.sort((a, b) => new Date(b.date) - new Date(a.date));

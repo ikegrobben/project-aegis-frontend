@@ -9,6 +9,7 @@ import logo from "../../assets/images/logo-text.png";
 import user from "../../assets/images/User.png";
 
 function Navigation({ authenticated }) {
+  // TODO - Make a seperate function for toggleNavigation if possible.
   function toggleNavigation() {
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const mobileNav = document.querySelector(".header-nav__list");
@@ -80,7 +81,14 @@ function Navigation({ authenticated }) {
                 </NavLink>
               </li>
               <li className="header-nav__list-item">
-                <NavLink to="/all-report">All Reports</NavLink>
+                <NavLink
+                  to="/all-reports"
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? " activated" : "")
+                  }
+                >
+                  All Reports
+                </NavLink>
               </li>
               <li className="header-user">
                 <p>Ike Grobben</p>

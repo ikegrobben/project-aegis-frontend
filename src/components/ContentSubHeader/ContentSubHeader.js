@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 // Import components
 import Button from "../Button/Button";
@@ -7,8 +8,10 @@ import Button from "../Button/Button";
 // import scss file
 import "./contentsubheader.scss";
 
-function ContentSubHeader({ title, hideBar, setNewMonth }) {
+function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
   const { register, handleSubmit } = useForm();
+
+  // TODO - Move functions to logic
 
   function setAMonth(data) {
     setNewMonth(data.Month);
@@ -25,7 +28,7 @@ function ContentSubHeader({ title, hideBar, setNewMonth }) {
       <section className="content-sub-header">
         <h2 className="content-sub-header__title">{title}</h2>
         <div className="container-button-select">
-          <form onChange={handleSubmit(setAMonth)}>
+          <form className={display} onChange={handleSubmit(setAMonth)}>
             <select {...register("Month", { required: true })}>
               <option value="">Choose a month</option>
               <option value="0">January</option>
@@ -33,17 +36,19 @@ function ContentSubHeader({ title, hideBar, setNewMonth }) {
               <option value="2">March</option>
             </select>
           </form>
-          <Button
-            name="New item"
-            type="button"
-            classNameButton="btn btn--light-blue"
-          />
+          <Link to="/create-report-item">
+            <Button
+              name="New item"
+              type="button"
+              classNameButton="btn btn--light-blue"
+            />
+          </Link>
         </div>
       </section>
       <div className={hideTopBar()}>
         <div className="top-bar__date-time">
           <span>Date & Time</span>
-        </div>{" "}
+        </div>
         <div className="top-bar__report">
           <span>Report item</span>
         </div>

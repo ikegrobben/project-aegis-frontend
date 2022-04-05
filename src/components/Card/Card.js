@@ -4,6 +4,7 @@ import React from "react";
 import "./card.scss";
 
 function Card({ boxSubject, boxAmountNumber, boxInfo }) {
+  // TODO - Change boxAmountNumber -> ...
   return (
     <div className="card">
       <h3>{boxSubject}</h3>

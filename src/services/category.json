@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "option": "Fire Alarm"
+  },
+  {
+    "id": "2",
+    "option": "Open safe"
+  },
+  {
+    "id": "3",
+    "option": "Drunk guest"
+  },
+  {
+    "id": "4",
+    "option": "Door lock programmed"
+  },
+  {
+    "id": "5",
+    "option": "Security round"
+  },
+  {
+    "id": "6",
+    "option": "Door opened"
+  },
+  {
+    "id": "7",
+    "option": "Safe reset"
+  },
+  {
+    "id": "8",
+    "option": "Drugs found"
+  }
+]

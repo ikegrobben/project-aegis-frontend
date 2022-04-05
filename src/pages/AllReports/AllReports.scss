@@ -1,0 +1,100 @@
+@use "../../assets/sass/sass-utils/" as *;
+
+.all-reports {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0.5em;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.all-reports__title {
+  padding: 1em 0em 0.5em;
+}
+
+.row {
+  display: flex;
+  margin: 0em 1.25em;
+  border-bottom: 1px solid #4e4f57;
+  padding: 0em 0em 0.5em;
+
+  & div {
+    padding: 0em 0.93em;
+  }
+
+  & .date {
+    min-width: 10em;
+
+    & .blue {
+      background-color: $blue-label-bg;
+      color: $blue-label-bote;
+      border: 1px solod $blue-label-bote;
+    }
+  }
+
+  & .open-items {
+    min-width: 10em;
+  }
+
+  & .closed-items {
+    min-width: 10em;
+  }
+
+  & .total-items {
+    width: 51em;
+  }
+
+  & .score {
+    min-width: 10em;
+    display: flex;
+    justify-content: center;
+
+    & span {
+      border-radius: 0.5em;
+      padding: 0em 0.75em;
+      display: inline-block;
+    }
+
+    & .green-span {
+      background-color: $green-label-bg;
+      color: $green-label-bote;
+      border: 1px solod $green-label-bote;
+    }
+
+    & .yellow-span {
+      background-color: $yellow-label-bg;
+      color: $yellow-label-bote;
+      border: 1px solod $yellow-label-bote;
+    }
+
+    & .red-span {
+      background-color: $red-label-bg;
+      color: $red-label-bote;
+      border: 1px solod $red-label-bote;
+    }
+  }
+}
+
+.top-bar {
+  &__date {
+    min-width: 10em;
+  }
+
+  &__open {
+    min-width: 10em;
+  }
+
+  &__closed {
+    min-width: 10em;
+  }
+
+  &__total {
+    min-width: 45em;
+  }
+
+  &__score {
+    min-width: 10em;
+  }
+}

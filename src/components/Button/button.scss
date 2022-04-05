@@ -22,8 +22,20 @@
   border: 1px solid $red-label-bote;
 }
 
+.btn--green {
+  background-color: $green-label-bg;
+  color: $green-label-bote;
+  border: 1px solid $green-label-bote;
+}
+
 .btn--light-blue {
   background-color: $blue-label-bg;
   color: $blue-label-bote;
   border: 1px solid $blue-label-bote;
+}
+
+.btn--yellow {
+  background-color: $yellow-label-bg;
+  border: 1px solid $yellow-label-bote;
+  color: $yellow-label-bote;
 }

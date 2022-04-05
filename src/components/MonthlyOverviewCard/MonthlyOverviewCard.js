@@ -11,6 +11,8 @@ function MonthlyOverviewCard({ reportObject, filterType, filterBy }) {
 
   const categoryArray = arrayFilter.map((c) => ({ category: c.category }));
 
+  // TODO - Change  names mp and o -> ....
+  // * - This .reduce is to get the amount of time a category has been used
   const result = [
     ...categoryArray
       .reduce((mp, o) => {

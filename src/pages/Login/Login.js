@@ -16,6 +16,7 @@ function Login({ authenticated, toggleAuthenticated }) {
 
   let navigate = useNavigate();
 
+  // TODO - When backend is live change this
   function onLoginSubmit(data) {
     if (data.username === "Ike" && data.password === "Test123") {
       toggleAuthenticated(!authenticated);

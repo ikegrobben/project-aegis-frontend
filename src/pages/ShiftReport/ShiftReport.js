@@ -11,6 +11,7 @@ import items from "../../services/report.json";
 import { getReportDate } from "../../logic/DateCheck";
 
 function ShiftReport({ logOut }) {
+  // TODO - Create a seperate function for reportTitleDate
   function reportTitleDate() {
     const date = getReportDate(new Date());
     return "Report " + date;
@@ -36,7 +37,7 @@ function ShiftReport({ logOut }) {
           boxInfo="That are 11 less reports then last month!"
         />
       </div>
-      <ContentSubHeader title="Reports 00:00 - 23:59" />
+      <ContentSubHeader title="Reports 00:00 - 23:59" display="hide" />
       <ReportItems
         reportObject={items}
         filterType="filterOnDay"
