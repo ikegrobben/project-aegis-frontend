@@ -18,6 +18,8 @@ import AllReports from "./pages/AllReports/AllReports";
 import ReportItem from "./pages/ReportItem/ReportItem";
 import EditReportItem from "./pages/EditReportItem/EditReportItem";
 import NewReportItem from "./pages/NewReportItem/NewReportItem";
+import Profile from "./pages/Profile/Profile";
+import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 
 // Import scss files
 import "./App.scss";
@@ -77,6 +79,11 @@ function App() {
               <Route
                 path="/report-item/:id/edit"
                 element={<EditReportItem logOut={logOut} />}
+              />
+              <Route path="/profile" element={<Profile logOut={logOut} />} />
+              <Route
+                path="/profile/edit"
+                element={<ProfileEdit logOut={logOut} />}
               />
             </Route>
           </Routes>

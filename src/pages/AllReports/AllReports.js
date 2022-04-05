@@ -3,7 +3,6 @@ import React from "react";
 // import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
-import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 
 // import scss
 import "./allreports.scss";
@@ -12,8 +11,6 @@ import "./allreports.scss";
 import reports from "../../services/reportsdb.json";
 
 function AllReports({ logOut }) {
-  // TODO create all reports overview
-
   function calculateScore(a, b) {
     const total = a + b;
     const score = Math.round((b / total) * 100);

@@ -1,0 +1,10 @@
+@use "../../assets/sass/sass-utils/" as *;
+
+.password-change {
+  padding-top: 1.25em;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 0.25em;
+  margin: 0 auto;
+}

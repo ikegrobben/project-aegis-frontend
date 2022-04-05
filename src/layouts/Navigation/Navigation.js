@@ -90,9 +90,11 @@ function Navigation({ authenticated }) {
                   All Reports
                 </NavLink>
               </li>
+
               <li className="header-user">
-                <p>Ike Grobben</p>
-                <img src={user} alt="Profile" />
+                <NavLink to="/profile">
+                  <p>Ike Grobben</p>
+                </NavLink>
               </li>
             </ul>
           ) : (

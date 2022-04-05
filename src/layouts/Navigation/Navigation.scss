@@ -111,7 +111,6 @@
       position: absolute;
       bottom: 2em;
       right: 2em;
-      display: flex;
 
       @include for-desktop {
         position: static;
@@ -120,17 +119,20 @@
         align-self: center;
       }
 
-      & p {
-        padding: 0.5em 0.8em;
-        margin-right: -8px;
-        height: 100%;
-        align-self: center;
-        background-color: $main-blue;
-        border-radius: 0.5em 0em 0em 0.5em;
-      }
+      a {
+        display: flex;
+        text-decoration: none;
+        & p {
+          padding: 0.5em 0.8em;
+          margin-right: -8px;
+          align-self: center;
+          background-color: $main-blue;
+          border-radius: 0.5em;
+        }
 
-      & img {
-        vertical-align: baseline;
+        & img {
+          vertical-align: baseline;
+        }
       }
     }
   }
