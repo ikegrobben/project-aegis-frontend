@@ -62,7 +62,7 @@ function Navigation({ authenticated }) {
               </li>
               <li className="header-nav__list-item">
                 <NavLink
-                  to="/shift-report"
+                  to="/report/last"
                   className={({ isActive }) =>
                     "nav-link" + (isActive ? " activated" : "")
                   }

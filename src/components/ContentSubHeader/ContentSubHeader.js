@@ -14,6 +14,7 @@ function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
   // TODO - Move functions to logic
 
   function setAMonth(data) {
+    console.log(data.Month);
     setNewMonth(data.Month);
   }
   function hideTopBar() {
@@ -31,9 +32,18 @@ function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
           <form className={display} onChange={handleSubmit(setAMonth)}>
             <select {...register("Month", { required: true })}>
               <option value="">Choose a month</option>
-              <option value="0">January</option>
-              <option value="1">February</option>
-              <option value="2">March</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
             </select>
           </form>
           <Link to="/create-report-item">
@@ -55,8 +65,8 @@ function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
         <div className="top-bar__status">
           <span>Status</span>
         </div>
-        <div className="top-bar__comments">
-          <span>Comments</span>
+        <div className="top-bar__images">
+          <span>Images</span>
         </div>
       </div>
     </>

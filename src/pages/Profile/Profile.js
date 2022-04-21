@@ -54,7 +54,7 @@ function Profile({ logOut }) {
           name="Add employee"
           type="button"
           classNameButton="btn btn--green"
-          clickFunction={() => navigate("/profile/add-employee")}
+          clickFunction={() => navigate("/add-employee")}
         />
       </div>
     </>

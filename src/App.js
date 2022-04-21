@@ -20,6 +20,7 @@ import EditReportItem from "./pages/EditReportItem/EditReportItem";
 import NewReportItem from "./pages/NewReportItem/NewReportItem";
 import Profile from "./pages/Profile/Profile";
 import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
+import NewProfile from "./pages/NewProfile/NewProfile";
 
 // Import scss files
 import "./App.scss";
@@ -57,7 +58,7 @@ function App() {
             <Route element={<PrivateRoute authenticated={isAuthenticated} />}>
               <Route path="/" element={<Dashboard logOut={logOut} />} />
               <Route
-                path="/shift-report"
+                path="/report/:id"
                 element={<ShiftReport logOut={logOut} />}
               />
               <Route
@@ -84,6 +85,10 @@ function App() {
               <Route
                 path="/profile/edit"
                 element={<ProfileEdit logOut={logOut} />}
+              />
+              <Route
+                path="/add-employee"
+                element={<NewProfile logOut={logOut} />}
               />
             </Route>
           </Routes>

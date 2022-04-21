@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 // import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
@@ -9,12 +11,35 @@ import "./allreports.scss";
 
 // import temp db
 import reports from "../../services/reportsdb.json";
+import { countItems, countOccStatus, countStatus } from "../../logic/Count";
 
 function AllReports({ logOut }) {
+  const [reports, setReports] = useState(null);
+  const [reportCount, setReportCount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalOpen, setTotalOpen] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await axios.get("http://localhost:8080/reports");
+        setReports(result.data);
+        setReportCount(result.data.length);
+        const items = countItems(result.data);
+        const open = countStatus(result.data, "Open");
+        setTotalOpen(open);
+        setTotalItems(items);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   function calculateScore(a, b) {
     const total = a + b;
     const score = Math.round((b / total) * 100);
-    if (score > 0 && score <= 50) {
+    if (score >= 0 && score <= 50) {
       return <span className="red-span">{score}%</span>;
     } else if (score > 50 && score <= 75) {
       return <span className="yellow-span">{score}%</span>;
@@ -22,6 +47,7 @@ function AllReports({ logOut }) {
       return <span className="green-span">{score}%</span>;
     }
   }
+
   return (
     <>
       <ContentHeader title="All reports" logOut={logOut} />
@@ -29,17 +55,17 @@ function AllReports({ logOut }) {
       <div className="cards">
         <Card
           boxSubject="Total daily reports"
-          boxAmountNumber="22"
+          boxAmountNumber={reportCount}
           boxInfo="And that within the first half of the year"
         />
         <Card
           boxSubject="Total items reported"
-          boxAmountNumber="145"
+          boxAmountNumber={totalItems}
           boxInfo="thats alot of words"
         />
         <Card
           boxSubject="Total items open"
-          boxAmountNumber="19"
+          boxAmountNumber={totalOpen}
           boxInfo="pay attention to open items"
         />
       </div>
@@ -61,22 +87,39 @@ function AllReports({ logOut }) {
           <span>Security score</span>
         </div>
       </div>
+
       <ul className="all-reports">
-        {reports.map((report) => {
-          return (
-            <li className="row" key={report.id}>
-              <div className="date">
-                <span className="blue">{report.reportdate}</span>
-              </div>
-              <div className="open-items">{report.open}</div>
-              <div className="closed-items">{report.closed}</div>
-              <div className="total-items">{report.open + report.closed}</div>
-              <div className="score">
-                {calculateScore(report.open, report.closed)}
-              </div>
-            </li>
-          );
-        })}
+        {reports &&
+          reports.map((report) => {
+            return (
+              <Link
+                to={`../report/${report.id}`}
+                className="report-item__report--link-text"
+                key={report.id}
+              >
+                <li className="row">
+                  <div className="date">
+                    <span className="blue">{report.reportDate}</span>
+                  </div>
+                  <div className="open-items">
+                    {console.log(report.reportItems)}
+                    {countOccStatus(report.reportItems, "Open")}
+                  </div>
+                  <div className="closed-items">
+                    {console.log(report.reportItems)}
+                    {countOccStatus(report.reportItems, "Closed")}
+                  </div>
+                  <div className="total-items">{report.reportItems.length}</div>
+                  <div className="score">
+                    {calculateScore(
+                      countOccStatus(report.reportItems, "Open"),
+                      countOccStatus(report.reportItems, "Closed")
+                    )}
+                  </div>
+                </li>
+              </Link>
+            );
+          })}
       </ul>
     </>
   );

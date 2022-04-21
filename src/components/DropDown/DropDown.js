@@ -18,8 +18,8 @@ function DropDown({
       >
         {options.map((option) => {
           return (
-            <option key={option.option} value={option.option}>
-              {option.option}
+            <option key={option.name} value={option.id}>
+              {option.name}
             </option>
           );
         })}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -18,8 +18,13 @@ import categories from "../../services/category.json";
 
 // Import logic
 import { currentDate } from "../../logic/DateCheck";
+import axios from "axios";
+import { uploadImage } from "../../logic/base64";
 
 function NewReportItem({ logOut }) {
+  const [image, setImage] = useState(null);
+  const [locations, setLocations] = useState(null);
+  const [categories, setCategories] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -29,16 +34,63 @@ function NewReportItem({ logOut }) {
     setValue,
   } = useForm({ mode: "onBlur" });
 
-  function sendData(data) {
-    console.log(data.reportItem);
-    navigate(-1);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const requestOne = axios.get("http://localhost:8080/locations");
+        const requestTwo = axios.get("http://localhost:8080/categories");
+
+        axios.all([requestOne, requestTwo]).then(
+          axios.spread((...responses) => {
+            const responseOne = responses[0];
+            const responseTwo = responses[1];
+            setLocations(responseOne.data);
+            setCategories(responseTwo.data);
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getData();
+  }, []);
+
+  async function sendData(form) {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/report-item",
+        form,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(response);
+      navigate(-1);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+    }
+  }
+
+  const sendFormData = async (data) => {
+    delete data["upload-image"];
+    data.image = image;
+    console.log(image);
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    sendData(jsonData);
+  };
+
+  async function imageEncode(data) {
+    const imageFile = await uploadImage(data);
+    setImage(imageFile);
   }
 
   return (
     <>
       <ContentHeader title={`Report Item ${currentDate()}`} logOut={logOut} />
       <h2 className="sr-only">Statistics</h2>
-      <form onSubmit={handleSubmit(sendData)}>
+      <form onSubmit={handleSubmit(sendFormData)}>
         <div className="cards report-item__cards">
           <Card
             boxSubject="Created by"
@@ -47,27 +99,31 @@ function NewReportItem({ logOut }) {
           <Card
             boxSubject="Location"
             boxAmountNumber={
-              <DropDown
-                dropDownId="chooseLocation"
-                register={register}
-                classNameLabel="dropdown"
-                classNameDropDown="report-dropdown"
-                options={locations}
-                // selected={}
-              />
+              locations && (
+                <DropDown
+                  dropDownId="location.id"
+                  register={register}
+                  classNameLabel="dropdown"
+                  classNameDropDown="report-dropdown"
+                  options={locations}
+                  // selected={}
+                />
+              )
             }
           />
           <Card
             boxSubject="Category"
             boxAmountNumber={
-              <DropDown
-                dropDownId="chooseCategory"
-                register={register}
-                classNameLabel="dropdown"
-                classNameDropDown="report-dropdown"
-                options={categories}
-                // selected={}
-              />
+              categories && (
+                <DropDown
+                  dropDownId="category.id"
+                  register={register}
+                  classNameLabel="dropdown"
+                  classNameDropDown="report-dropdown"
+                  options={categories}
+                  // selected={}
+                />
+              )
             }
           />
         </div>
@@ -84,19 +140,20 @@ function NewReportItem({ logOut }) {
         </p>
 
         <textarea
-          {...register("reportItem")}
+          className="edit-report"
+          {...register("content")}
           id="report-text"
           name="report-text"
           // defaultValue={}
-          onChange={(e) => setValue("reportItem", e.target.value)}
+          onChange={(e) => setValue("content", e.target.value)}
         ></textarea>
         <label htmlFor="image-upload"></label>
         <input
           {...register("upload-image")}
           id="image-upload"
           type="file"
-          accept="image/png, image/jpeg"
-          multiple
+          accept="image/jpeg, image/png"
+          onChange={(e) => imageEncode(e)}
         />
 
         <div className="buttons">

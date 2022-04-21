@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 // import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
+import Button from "../../components/Button/Button";
 
 // import scss
-import "./profileedit.scss";
-import Button from "../../components/Button/Button";
+import "./newprofile.scss";
 
 // import temp db
 import users from "../../services/employees.json";
@@ -18,48 +18,66 @@ function Profile({ logOut }) {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
+  function addEmployee() {
+    navigate(-1);
+  }
   return (
     <>
-      <ContentHeader title="Profile" logOut={logOut} />
-      <h2 className="sr-only">Statistics</h2>
-      <div className="profile-cards cards">
-        <Card boxSubject="Name" boxAmountNumber="Ike Grobben" />
-        <Card boxSubject="Job position" boxAmountNumber="Security Guard" />
-        <Card boxSubject="At location" boxAmountNumber="Novi" />
-      </div>
-      <div className="password-change">
-        <InputField
-          classNameLabel="old-password"
-          inputId="old-password"
-          classNameInput="old-password__input"
-          inputType="password"
-          inputName="Old Password"
-          register={register}
-        />
-        <InputField
-          classNameLabel="new-password"
-          inputId="new-password"
-          classNameInput="new-password__input"
-          inputType="password"
-          inputName="New Password"
-          register={register}
-        />
-        <InputField
-          classNameLabel="repeat-password"
-          inputId="repeat-password"
-          classNameInput="repeat-password__input"
-          inputType="password"
-          inputName="Repeat New Password"
-          register={register}
-        />
-      </div>
-      <div className="buttons">
-        <Button
-          name="Save"
-          type="button"
-          classNameButton="btn btn--green"
-          clickFunction={() => navigate("/profile")}
-        />
+      <ContentHeader title="Add employee" logOut={logOut} />
+      <div className="form-container">
+        <form className="employee-form">
+          <div className="add-employee">
+            <InputField
+              classNameLabel="fullname"
+              inputId="fullname"
+              classNameInput="fullname__input"
+              inputType="text"
+              inputName="Fullname"
+              register={register}
+            />
+            <InputField
+              classNameLabel="password"
+              inputId="password"
+              classNameInput="password__input"
+              inputType="password"
+              inputName="Create Password"
+              register={register}
+            />
+            <label id="job"></label>
+            <select>
+              <option value="" disabled selected hidden>
+                Choose a job
+              </option>
+              <option value="teamLeader">Team leader</option>
+              <option value="securityGuard">Security Guard</option>
+            </select>
+            <label id="userlevel"></label>
+            <select>
+              <option value="" disabled selected hidden>
+                Choose a user level
+              </option>
+              <option value="user">User</option>
+              <option value="Admin">admin</option>
+            </select>
+            <label id="location"></label>
+            <select>
+              <option value="" disabled selected hidden>
+                Choose a location
+              </option>
+              <option value="novi">Novi</option>
+              <option value="krasnapolsky">Krasnapolsky</option>
+              <option value="nhDoelen">NH Doelen</option>
+            </select>
+          </div>
+          <div className="buttons">
+            <Button
+              name="Add employee"
+              type="button"
+              classNameButton="btn btn--green"
+              clickFunction={handleSubmit(addEmployee)}
+            />
+          </div>
+        </form>
       </div>
     </>
   );

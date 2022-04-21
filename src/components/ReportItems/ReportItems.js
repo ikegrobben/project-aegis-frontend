@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 // Import Logic
 import { FilterItems, SortItems } from "../../logic/FilterSortItems";
@@ -11,6 +12,7 @@ import "./reportitems.scss";
 // Import img
 import userImg from "../../assets/images/user.svg";
 import { Link } from "react-router-dom";
+import { getImage, getImageLength } from "../../logic/base64";
 
 function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
   // * - Filter the Array of objects
@@ -19,48 +21,56 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
   // * - Sort items
   SortItems(reportItems, sortType, sortBy);
 
+  console.log(reportItems);
+
   return reportItems.map((reportItem) => {
+    const image = getImage(reportItem.image);
+    console.log(image);
+    console.log(reportItem.reportItemDateTime);
     return (
-      <div key={reportItem.date}>
-        <article className="report-item" key={reportItem.date}>
-          <div className="report-item__date">
-            {/* check if date is today */}
-            {dateToday(reportItem.date)}
-          </div>
-          <div className="report-item__report">
-            <Link
-              to={`/report-item/${reportItem.id}`}
-              className="report-item__report--link-text"
-            >
+      <Link
+        to={`/report-item/${reportItem.id}`}
+        className="report-item__report--link-text"
+        key={reportItem.reportItemDateTime}
+      >
+        <div key={reportItem.reportItemDateTime}>
+          <article className="report-item">
+            <div className="report-item__date">
+              {/* check if date is today */}
+              {dateToday(
+                moment(reportItem.reportItemDateTime).format("YYYY-MM-DD hh:mm")
+              )}
+            </div>
+            <div className="report-item__report">
               <div className="report-item__paragraph">
                 {reportItem.content.length >= 250
                   ? reportItem.content.slice(0, 250) + " . . ."
                   : reportItem.content}
               </div>
-            </Link>
 
-            <ul>
-              <li className="report-item__location">{reportItem.location}</li>
-              <li className="report-item__category">{reportItem.category}</li>
+              <ul>
+                <li className="report-item__location">
+                  {reportItem.location.name}
+                </li>
+                <li className="report-item__category">
+                  {reportItem.category.name}
+                </li>
 
-              {reportItem.images > 0 && (
-                <li className="report-item__images">{reportItem.images}</li>
-              )}
-
-              <li className="report-item__creator">
-                <img src={userImg} alt="User" /> {reportItem.creator}
-              </li>
-            </ul>
-          </div>
-          <div className="report-item__status">
-            {statusCheck(reportItem.status)}
-          </div>
-          <div className="report-item__comments">
-            <span>{reportItem.Comments}</span>
-          </div>
-        </article>
-        <div className="divider"></div>
-      </div>
+                <li className="report-item__creator">
+                  <img src={userImg} alt="User" /> Creator name
+                </li>
+              </ul>
+            </div>
+            <div className="report-item__status">
+              {statusCheck(reportItem.status)}
+            </div>
+            <div className="report-item__comments">
+              <span>{getImageLength(reportItem.image)}</span>
+            </div>
+          </article>
+          <div className="divider"></div>
+        </div>
+      </Link>
     );
   });
 }

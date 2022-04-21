@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // Import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
@@ -13,54 +14,88 @@ import "./dashboard.scss";
 
 // Temp import for data
 import items from "../../services/report.json";
+import { countStatus } from "../../logic/Count";
+import { calculatePercentage } from "../../logic/Calculate";
 
 function Dashboard({ logOut }) {
+  const [reportsOpen, setReportsOpen] = useState(null);
+  const [reportsClosed, setReportsClosed] = useState(null);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const requestOne = axios.get("http://localhost:8080/report-items/open");
+        const requestTwo = axios.get(
+          "http://localhost:8080/report-items/closed"
+        );
+
+        axios.all([requestOne, requestTwo]).then(
+          axios.spread((...responses) => {
+            const responseOne = responses[0];
+            const responseTwo = responses[1];
+            setReportsOpen(responseOne.data);
+            setReportsClosed(responseTwo.data);
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
-    <>
-      <ContentHeader title="Dashboard" logOut={logOut} />
-      <h2 className="sr-only">Statistics</h2>
-      <div className="cards">
-        <Card
-          boxSubject="Open reports this month"
-          boxAmountNumber="7"
-          boxInfo="Pay attention to open items"
-        />
-        <Card
-          boxSubject="Closed reports this month"
-          boxAmountNumber="72"
-          boxInfo="and succesfully handled!"
-        />
-        <Card
-          boxSubject="Total reports this month"
-          boxAmountNumber="79"
-          boxInfo="That are 13 more reports then last month!"
-        />
-      </div>
-      <ContentSubHeader title="All open reports" display="hide" />
-      <ReportItems
-        reportObject={items}
-        filterType="filterOnStatus"
-        filterBy="open"
-        sortType="date"
-        sortBy="latest first"
-      />
-      <div className="dashboard__buttons">
-        <Link to="/monthly-report">
-          <Button
-            name="See Monthly report"
-            type="button"
-            classNameButton="btn btn--light-blue"
+    reportsClosed &&
+    reportsOpen && (
+      <>
+        <ContentHeader title="Dashboard" logOut={logOut} />
+        <h2 className="sr-only">Statistics</h2>
+        <div className="cards">
+          <Card
+            boxSubject="Total open reports"
+            boxAmountNumber={reportsOpen.length}
+            boxInfo="Pay attention to open items"
           />
-        </Link>
-        <Link to="/shift-report">
-          <Button
-            name="See todays report"
-            type="button"
-            classNameButton="btn btn--light-blue"
+          <Card
+            boxSubject="Total closed reports"
+            boxAmountNumber={reportsClosed.length}
+            boxInfo="and succesfully handled!"
           />
-        </Link>
-      </div>
-    </>
+          <Card
+            boxSubject="Total reports count"
+            boxAmountNumber={reportsOpen.length + reportsClosed.length}
+            boxInfo={`${calculatePercentage(
+              reportsOpen.length,
+              reportsClosed.length
+            )}% has been succesfully closed`}
+          />
+        </div>
+        <ContentSubHeader title="All open reports" display="hide" />
+        <ReportItems
+          reportObject={reportsOpen}
+          filterType="filterOnStatus"
+          filterBy="open"
+          sortType="date"
+          sortBy="latest first"
+        />
+        )}
+        <div className="dashboard__buttons">
+          <Link to="/monthly-report">
+            <Button
+              name="See Monthly report"
+              type="button"
+              classNameButton="btn btn--light-blue"
+            />
+          </Link>
+          <Link to="/shift-report">
+            <Button
+              name="See todays report"
+              type="button"
+              classNameButton="btn btn--light-blue"
+            />
+          </Link>
+        </div>
+      </>
+    )
   );
 }
 

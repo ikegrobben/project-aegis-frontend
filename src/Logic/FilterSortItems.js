@@ -2,7 +2,7 @@
 export function FilterItems(filterArray, filterType, filterBy) {
   const arrayFilter = filterArray.filter((item) => {
     const dateToday = new Date(filterBy);
-    const dateItem = new Date(item.date);
+    const dateItem = new Date(item.reportItemDateTime);
 
     switch (filterType) {
       case "filterOnStatus":
@@ -35,9 +35,13 @@ export function FilterItems(filterArray, filterType, filterBy) {
 // * Sort items based on sortType
 export function SortItems(sortArray, sortType, sortBy) {
   if (sortType === "date" && sortBy === "latest first") {
-    sortArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+    sortArray.sort(
+      (a, b) => new Date(b.reportItemDateTime) - new Date(a.reportItemDateTime)
+    );
   } else if (sortType === "date" && sortBy === "latest last") {
-    sortArray.sort((a, b) => new Date(a.date) - new Date(b.date));
+    sortArray.sort(
+      (a, b) => new Date(a.reportItemDateTime) - new Date(b.reportItemDateTime)
+    );
   } else if (sortType === "status" && sortBy === "open") {
     sortArray.sort((a, b) =>
       a.status.toUpperCase() > b.status.toUpperCase()
