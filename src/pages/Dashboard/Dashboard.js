@@ -77,7 +77,7 @@ function Dashboard({ logOut }) {
           sortType="date"
           sortBy="latest first"
         />
-        )}
+        )
         <div className="dashboard__buttons">
           <Link to="/monthly-report">
             <Button
