@@ -17,6 +17,7 @@ import items from "../../services/report.json";
 import { getReportDate } from "../../logic/DateCheck";
 import { statusCheck } from "../../logic/StatusCheck";
 import { getImage } from "../../logic/base64";
+import { getToken } from "../../logic/JwtToken";
 
 function ReportItem({ logOut }) {
   // * Opens an item based on ID
@@ -28,7 +29,8 @@ function ReportItem({ logOut }) {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/report-item/${id}`
+          `http://localhost:8080/report-item/${id}`,
+          getToken()
         );
         console.log(result.data);
         setReport(result.data);
@@ -39,6 +41,19 @@ function ReportItem({ logOut }) {
     fetchData();
   }, [id]);
 
+  async function deleteItem() {
+    try {
+      const result = await axios.delete(
+        `http://localhost:8080/report-item/${id}/delete`,
+        getToken()
+      );
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+    navigate(-1);
+  }
+
   return (
     report && (
       <>
@@ -48,11 +63,19 @@ function ReportItem({ logOut }) {
         />
         <h2 className="sr-only">Statistics</h2>
         <div className="cards report-item__cards">
-          <Card boxSubject="Created by" boxAmountNumber="Name" />
+          <Card
+            boxSubject="Created by"
+            boxAmountNumber={`${report.users.firstname} ${report.users.lastname}`}
+          />
           <Card boxSubject="Location" boxAmountNumber={report.location.name} />
           <Card boxSubject="Category" boxAmountNumber={report.category.name} />
         </div>
-        <p>status: {statusCheck(report.status)}</p>
+        <div className="stat-del">
+          <p>status: {statusCheck(report.status)}</p>
+          <button className="delete" onClick={() => deleteItem()}>
+            Delete item
+          </button>
+        </div>
         <article className="report-text">
           <p>{report.content}</p>
         </article>

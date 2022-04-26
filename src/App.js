@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Import Routes
@@ -24,76 +24,59 @@ import NewProfile from "./pages/NewProfile/NewProfile";
 
 // Import scss files
 import "./App.scss";
+import { AuthContext, logout, autoLogout } from "./logic/context";
 
 function App() {
+  const { isAuth, logout } = useContext(AuthContext);
   // TODO - Login functionality with backend
   // * - Login check because there is no backend yet.
 
-  const [isAuthenticated, toggleIsAuthenticated] = useState(true);
-
-  function logOut() {
-    console.log("logout");
-    toggleIsAuthenticated(!isAuthenticated);
-  }
-
   return (
     <>
-      <BrowserRouter>
-        <Navigation authenticated={isAuthenticated} />
-        <main className="main-content">
-          <Routes>
+      <Navigation authenticated={isAuth} />
+      <main className="main-content">
+        <Routes>
+          <Route element={<LoginPrivateRoute authenticated={isAuth} />}>
+            <Route path="/login" element={<Login authenticated={isAuth} />} />
+          </Route>
+          <Route element={<PrivateRoute authenticated={isAuth} />}>
+            <Route path="/" element={<Dashboard logOut={logout} />} />
             <Route
-              element={<LoginPrivateRoute authenticated={isAuthenticated} />}
-            >
-              <Route
-                path="/login"
-                element={
-                  <Login
-                    authenticated={isAuthenticated}
-                    toggleAuthenticated={toggleIsAuthenticated}
-                  />
-                }
-              />
-            </Route>
-            <Route element={<PrivateRoute authenticated={isAuthenticated} />}>
-              <Route path="/" element={<Dashboard logOut={logOut} />} />
-              <Route
-                path="/report/:id"
-                element={<ShiftReport logOut={logOut} />}
-              />
-              <Route
-                path="/monthly-report"
-                element={<MonthlyReport logOut={logOut} />}
-              />
-              <Route
-                path="/all-reports"
-                element={<AllReports logOut={logOut} />}
-              />
-              <Route
-                path="/create-report-item"
-                element={<NewReportItem logOut={logOut} />}
-              />
-              <Route
-                path="/report-item/:id"
-                element={<ReportItem logOut={logOut} />}
-              />
-              <Route
-                path="/report-item/:id/edit"
-                element={<EditReportItem logOut={logOut} />}
-              />
-              <Route path="/profile" element={<Profile logOut={logOut} />} />
-              <Route
-                path="/profile/edit"
-                element={<ProfileEdit logOut={logOut} />}
-              />
-              <Route
-                path="/add-employee"
-                element={<NewProfile logOut={logOut} />}
-              />
-            </Route>
-          </Routes>
-        </main>
-      </BrowserRouter>
+              path="/report/:id"
+              element={<ShiftReport logOut={logout} />}
+            />
+            <Route
+              path="/monthly-report"
+              element={<MonthlyReport logOut={logout} />}
+            />
+            <Route
+              path="/all-reports"
+              element={<AllReports logOut={logout} />}
+            />
+            <Route
+              path="/create-report-item"
+              element={<NewReportItem logOut={logout} />}
+            />
+            <Route
+              path="/report-item/:id"
+              element={<ReportItem logOut={logout} />}
+            />
+            <Route
+              path="/report-item/:id/edit"
+              element={<EditReportItem logOut={logout} />}
+            />
+            <Route path="/profile" element={<Profile logOut={logout} />} />
+            <Route
+              path="/profile/edit"
+              element={<ProfileEdit logOut={logout} />}
+            />
+            <Route
+              path="/add-employee"
+              element={<NewProfile logOut={logout} />}
+            />
+          </Route>
+        </Routes>
+      </main>
 
       <Footer />
     </>

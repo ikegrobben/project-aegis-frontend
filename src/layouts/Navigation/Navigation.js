@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../logic/context";
 
 // Import scss
 import "./navigation.scss";
@@ -9,7 +10,7 @@ import logo from "../../assets/images/logo-text.png";
 import user from "../../assets/images/User.png";
 
 function Navigation({ authenticated }) {
-  // TODO - Make a seperate function for toggleNavigation if possible.
+  const context = useContext(AuthContext);
   function toggleNavigation() {
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const mobileNav = document.querySelector(".header-nav__list");
@@ -93,7 +94,7 @@ function Navigation({ authenticated }) {
 
               <li className="header-user">
                 <NavLink to="/profile">
-                  <p>Ike Grobben</p>
+                  <p>{context.user.firstname + " " + context.user.lastname}</p>
                 </NavLink>
               </li>
             </ul>

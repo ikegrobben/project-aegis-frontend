@@ -12,6 +12,7 @@ import "./allreports.scss";
 // import temp db
 import reports from "../../services/reportsdb.json";
 import { countItems, countOccStatus, countStatus } from "../../logic/Count";
+import { getToken } from "../../logic/JwtToken";
 
 function AllReports({ logOut }) {
   const [reports, setReports] = useState(null);
@@ -22,7 +23,10 @@ function AllReports({ logOut }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await axios.get("http://localhost:8080/reports");
+        const result = await axios.get(
+          "http://localhost:8080/reports",
+          getToken()
+        );
         setReports(result.data);
         setReportCount(result.data.length);
         const items = countItems(result.data);

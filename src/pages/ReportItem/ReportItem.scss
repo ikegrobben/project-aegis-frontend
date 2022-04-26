@@ -58,3 +58,16 @@ span {
     height: 20em;
   }
 }
+
+.stat-del {
+  display: flex;
+  justify-content: space-between;
+}
+
+button.delete,
+button.reactivate {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}

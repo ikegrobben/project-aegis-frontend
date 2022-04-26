@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -13,13 +13,50 @@ import "./newprofile.scss";
 // import temp db
 import users from "../../services/employees.json";
 import InputField from "../../components/InputField/InputField";
+import axios from "axios";
+import { getToken } from "../../logic/JwtToken";
+import DropDown from "../../components/DropDown/DropDown";
 
 function Profile({ logOut }) {
+  const [positions, setPositions] = useState();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
-  function addEmployee() {
-    navigate(-1);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const result = await axios.get(
+          "http://localhost:8080/positions",
+          getToken()
+        );
+        console.log(result);
+        setPositions(result.data);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    getData();
+  }, []);
+
+  async function sendData(form) {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/create-user",
+        form,
+        getToken()
+      );
+      console.log(response);
+      navigate(-1);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function addEmployee(data) {
+    console.log(data);
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    sendData(jsonData);
   }
   return (
     <>
@@ -28,11 +65,11 @@ function Profile({ logOut }) {
         <form className="employee-form">
           <div className="add-employee">
             <InputField
-              classNameLabel="fullname"
-              inputId="fullname"
-              classNameInput="fullname__input"
+              classNameLabel="username"
+              inputId="username"
+              classNameInput="Username__input"
               inputType="text"
-              inputName="Fullname"
+              inputName="Username"
               register={register}
             />
             <InputField
@@ -43,31 +80,41 @@ function Profile({ logOut }) {
               inputName="Create Password"
               register={register}
             />
-            <label id="job"></label>
-            <select>
-              <option value="" disabled selected hidden>
-                Choose a job
-              </option>
-              <option value="teamLeader">Team leader</option>
-              <option value="securityGuard">Security Guard</option>
-            </select>
-            <label id="userlevel"></label>
-            <select>
+            <InputField
+              classNameLabel="firstname"
+              inputId="firstname"
+              classNameInput="firstname__input"
+              inputType="firstname"
+              inputName="Firstname"
+              register={register}
+            />
+            <InputField
+              classNameLabel="lastname"
+              inputId="lastname"
+              classNameInput="lastname__input"
+              inputType="lastname"
+              inputName="Lastname"
+              register={register}
+            />
+            {positions && (
+              <DropDown
+                dropDownId="job.id"
+                register={register}
+                classNameLabel="dropdown"
+                classNameDropDown="report-dropdown"
+                options={positions}
+                // selected={}
+              />
+            )}
+            <label id="userlevel" htmlFor="role.id"></label>
+            <select className="report-dropdown" {...register("role")}>
               <option value="" disabled selected hidden>
                 Choose a user level
               </option>
-              <option value="user">User</option>
-              <option value="Admin">admin</option>
+              <option value="USER">User</option>
+              <option value="ADMIN">admin</option>
             </select>
             <label id="location"></label>
-            <select>
-              <option value="" disabled selected hidden>
-                Choose a location
-              </option>
-              <option value="novi">Novi</option>
-              <option value="krasnapolsky">Krasnapolsky</option>
-              <option value="nhDoelen">NH Doelen</option>
-            </select>
           </div>
           <div className="buttons">
             <Button

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { AuthContext } from "../../logic/context";
 
 // Import components
 import Card from "../../components/Card/Card";
@@ -18,13 +20,15 @@ import categories from "../../services/category.json";
 
 // Import logic
 import { currentDate } from "../../logic/DateCheck";
-import axios from "axios";
+
 import { uploadImage } from "../../logic/base64";
+import { getToken } from "../../logic/JwtToken";
 
 function NewReportItem({ logOut }) {
   const [image, setImage] = useState(null);
   const [locations, setLocations] = useState(null);
   const [categories, setCategories] = useState(null);
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -37,8 +41,14 @@ function NewReportItem({ logOut }) {
   useEffect(() => {
     async function getData() {
       try {
-        const requestOne = axios.get("http://localhost:8080/locations");
-        const requestTwo = axios.get("http://localhost:8080/categories");
+        const requestOne = axios.get(
+          "http://localhost:8080/locations",
+          getToken()
+        );
+        const requestTwo = axios.get(
+          "http://localhost:8080/categories",
+          getToken()
+        );
 
         axios.all([requestOne, requestTwo]).then(
           axios.spread((...responses) => {
@@ -60,9 +70,7 @@ function NewReportItem({ logOut }) {
       const response = await axios.post(
         "http://localhost:8080/report-item",
         form,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        getToken()
       );
       console.log(response);
       navigate(-1);
@@ -75,6 +83,7 @@ function NewReportItem({ logOut }) {
   const sendFormData = async (data) => {
     delete data["upload-image"];
     data.image = image;
+    console.log(data);
     console.log(image);
     const jsonData = JSON.stringify(data);
     console.log(jsonData);
@@ -93,8 +102,9 @@ function NewReportItem({ logOut }) {
       <form onSubmit={handleSubmit(sendFormData)}>
         <div className="cards report-item__cards">
           <Card
-            boxSubject="Created by"
-            // boxAmountNumber={}
+            {...register("users.id")}
+            boxSubject="Creating by"
+            boxAmountNumber={`${context.user.firstname} ${context.user.lastname}`}
           />
           <Card
             boxSubject="Location"
@@ -154,6 +164,12 @@ function NewReportItem({ logOut }) {
           type="file"
           accept="image/jpeg, image/png"
           onChange={(e) => imageEncode(e)}
+        />
+        <input
+          {...register("users.id")}
+          type="hidden"
+          defaultValue={context.user.id}
+          value={context.user.id}
         />
 
         <div className="buttons">

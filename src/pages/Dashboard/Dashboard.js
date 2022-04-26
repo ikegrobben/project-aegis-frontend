@@ -16,16 +16,23 @@ import "./dashboard.scss";
 import items from "../../services/report.json";
 import { countStatus } from "../../logic/Count";
 import { calculatePercentage } from "../../logic/Calculate";
+import { getToken } from "../../logic/JwtToken";
 
 function Dashboard({ logOut }) {
   const [reportsOpen, setReportsOpen] = useState(null);
   const [reportsClosed, setReportsClosed] = useState(null);
   useEffect(() => {
+    const token = localStorage.getItem("token");
     async function fetchData() {
       try {
-        const requestOne = axios.get("http://localhost:8080/report-items/open");
+        console.log(token);
+        const requestOne = axios.get(
+          "http://localhost:8080/report-items/open",
+          getToken()
+        );
         const requestTwo = axios.get(
-          "http://localhost:8080/report-items/closed"
+          "http://localhost:8080/report-items/closed",
+          getToken()
         );
 
         axios.all([requestOne, requestTwo]).then(
@@ -86,7 +93,7 @@ function Dashboard({ logOut }) {
               classNameButton="btn btn--light-blue"
             />
           </Link>
-          <Link to="/shift-report">
+          <Link to="/report/last">
             <Button
               name="See todays report"
               type="button"

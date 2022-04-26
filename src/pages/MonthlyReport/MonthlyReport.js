@@ -21,6 +21,7 @@ import {
 } from "../../logic/Count";
 import { getMonth } from "../../logic/DateCheck";
 import { calculatePercentage } from "../../logic/Calculate";
+import { getToken } from "../../logic/JwtToken";
 
 function MonthlyReport({ logOut }) {
   const [month, setMonth] = useState("april");
@@ -31,7 +32,8 @@ function MonthlyReport({ logOut }) {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/report-items/${month}`
+          `http://localhost:8080/report-items/${month}`,
+          getToken()
         );
         setData(result.data);
         console.log(result.data);

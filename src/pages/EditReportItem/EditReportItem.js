@@ -20,6 +20,7 @@ import categories from "../../services/category.json";
 // Import logic
 import { getReportDate } from "../../logic/DateCheck";
 import { uploadImage } from "../../logic/base64";
+import { getToken } from "../../logic/JwtToken";
 
 function EditReportItem({ logOut }) {
   // * Opens an item based on ID
@@ -43,7 +44,8 @@ function EditReportItem({ logOut }) {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/report-item/${id}`
+          `http://localhost:8080/report-item/${id}`,
+          getToken()
         );
         setReport(result.data);
       } catch (error) {
@@ -56,8 +58,14 @@ function EditReportItem({ logOut }) {
   useEffect(() => {
     async function getData() {
       try {
-        const requestOne = axios.get("http://localhost:8080/locations");
-        const requestTwo = axios.get("http://localhost:8080/categories");
+        const requestOne = axios.get(
+          "http://localhost:8080/locations",
+          getToken()
+        );
+        const requestTwo = axios.get(
+          "http://localhost:8080/categories",
+          getToken()
+        );
 
         axios.all([requestOne, requestTwo]).then(
           axios.spread((...responses) => {
@@ -79,9 +87,7 @@ function EditReportItem({ logOut }) {
       const res = await axios.put(
         `http://localhost:8080/report-item/${id}`,
         form,
-        {
-          headers: { "content-type": "application/json" },
-        }
+        getToken()
       );
       console.log(res);
       navigate(-1);
@@ -113,7 +119,10 @@ function EditReportItem({ logOut }) {
         <h2 className="sr-only">Statistics</h2>
         <form onSubmit={handleSubmit(updateReport)}>
           <div className="cards report-item__cards">
-            <Card boxSubject="Created by" boxAmountNumber="NAME" />
+            <Card
+              boxSubject="Created by"
+              boxAmountNumber={`${report.user.firstname} ${report.user.lastname}`}
+            />
             <Card
               boxSubject="Location"
               boxAmountNumber={

@@ -11,6 +11,7 @@ import ReportItems from "../../components/ReportItems/ReportItems";
 // Temp import for data
 import { getReportDate } from "../../logic/DateCheck";
 import { countStatus } from "../../logic/Count";
+import { getToken } from "../../logic/JwtToken";
 
 function ShiftReport({ logOut }) {
   // TODO - Create a seperate function for reportTitleDate
@@ -23,7 +24,10 @@ function ShiftReport({ logOut }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await axios.get(`http://localhost:8080/report/${id}`);
+        const result = await axios.get(
+          `http://localhost:8080/report/${id}`,
+          getToken()
+        );
         console.log(result.data[0]);
         setTotalOpen(countStatus(result.data, "Open"));
         setTotalClosed(countStatus(result.data, "Closed"));

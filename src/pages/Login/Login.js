@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../logic/context";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // Import components
 import InputField from "../../components/InputField/InputField";
@@ -12,16 +14,25 @@ import "./login.scss";
 // Function
 function Login({ authenticated, toggleAuthenticated }) {
   // useState & useForm
+  const { login } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
   let navigate = useNavigate();
 
   // TODO - When backend is live change this
-  function onLoginSubmit(data) {
-    if (data.username === "Ike" && data.password === "Test123") {
-      toggleAuthenticated(!authenticated);
-      navigate("/dashboard");
-      console.log("123");
+  async function postLogin(data) {
+    try {
+      const json = {
+        username: data.username,
+        password: data.password,
+      };
+      const result = await axios.post("http://localhost:8080/login", json, {
+        Headers: { "Content-Type": "application/json" },
+      });
+      console.log(result);
+      login(result.data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -31,7 +42,7 @@ function Login({ authenticated, toggleAuthenticated }) {
         <h1 id="login-title" className="login__title title--white text-center">
           Login
         </h1>
-        <form className="login__form" onSubmit={handleSubmit(onLoginSubmit)}>
+        <form className="login__form" onSubmit={handleSubmit(postLogin)}>
           <InputField
             inputId="username"
             inputName="Username"
