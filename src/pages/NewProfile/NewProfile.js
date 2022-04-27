@@ -48,6 +48,9 @@ function Profile({ logOut }) {
       console.log(response);
       navigate(-1);
     } catch (e) {
+      if (e.response.status === 409) {
+        console.log("Username alreade exists");
+      }
       console.error(e);
     }
   }
