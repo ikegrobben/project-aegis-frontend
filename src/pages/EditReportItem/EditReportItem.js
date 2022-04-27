@@ -121,7 +121,7 @@ function EditReportItem({ logOut }) {
           <div className="cards report-item__cards">
             <Card
               boxSubject="Created by"
-              boxAmountNumber={`${report.user.firstname} ${report.user.lastname}`}
+              boxAmountNumber={`${report.users.firstname} ${report.users.lastname}`}
             />
             <Card
               boxSubject="Location"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -18,11 +18,13 @@ import { getReportDate } from "../../logic/DateCheck";
 import { statusCheck } from "../../logic/StatusCheck";
 import { getImage } from "../../logic/base64";
 import { getToken } from "../../logic/JwtToken";
+import { AuthContext } from "../../logic/context";
 
 function ReportItem({ logOut }) {
   // * Opens an item based on ID
   const [report, setReport] = useState(null);
   const { id } = useParams();
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -70,12 +72,16 @@ function ReportItem({ logOut }) {
           <Card boxSubject="Location" boxAmountNumber={report.location.name} />
           <Card boxSubject="Category" boxAmountNumber={report.category.name} />
         </div>
-        <div className="stat-del">
-          <p>status: {statusCheck(report.status)}</p>
-          <button className="delete" onClick={() => deleteItem()}>
-            Delete item
-          </button>
-        </div>
+        {context.user.username === report.users.username ? (
+          <div className="stat-del">
+            <p>status: {statusCheck(report.status)}</p>
+            <button className="delete" onClick={() => deleteItem()}>
+              Delete item
+            </button>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <article className="report-text">
           <p>{report.content}</p>
         </article>

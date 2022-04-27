@@ -3,15 +3,10 @@ import React from "react";
 // Import scss
 import "./monthlyoverviewcard.scss";
 
-// Import Logic
-import { FilterItems } from "../../logic/FilterSortItems";
-import { countCategories, countOccCategories } from "../../logic/Count";
-
 function MonthlyOverviewCard({ reportObject, filterType, filterBy }) {
   const categoryArray = reportObject.map((c) => ({
     category: c.category.name,
   }));
-  console.log(categoryArray);
 
   const result = [
     ...categoryArray

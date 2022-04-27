@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { AuthContext } from "../../logic/context";
@@ -14,9 +14,6 @@ import DropDown from "../../components/DropDown/DropDown";
 import "./newreportitem.scss";
 
 // Temp import for data
-import items from "../../services/report.json";
-import locations from "../../services/location.json";
-import categories from "../../services/category.json";
 
 // Import logic
 import { currentDate } from "../../logic/DateCheck";
@@ -41,11 +38,11 @@ function NewReportItem({ logOut }) {
   useEffect(() => {
     async function getData() {
       try {
-        const requestOne = axios.get(
+        const requestOne = await axios.get(
           "http://localhost:8080/locations",
           getToken()
         );
-        const requestTwo = axios.get(
+        const requestTwo = await axios.get(
           "http://localhost:8080/categories",
           getToken()
         );
@@ -102,7 +99,6 @@ function NewReportItem({ logOut }) {
       <form onSubmit={handleSubmit(sendFormData)}>
         <div className="cards report-item__cards">
           <Card
-            {...register("users.id")}
             boxSubject="Creating by"
             boxAmountNumber={`${context.user.firstname} ${context.user.lastname}`}
           />
@@ -168,7 +164,6 @@ function NewReportItem({ logOut }) {
         <input
           {...register("users.id")}
           type="hidden"
-          defaultValue={context.user.id}
           value={context.user.id}
         />
 
