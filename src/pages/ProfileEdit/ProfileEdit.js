@@ -25,7 +25,7 @@ function Profile({ logOut }) {
   async function sendData(form) {
     try {
       const response = await axios.put(
-        `http://localhost:8080/users/${context.user.id}/password`,
+        `http://localhost:8080/user/${context.user.id}/password`,
         form,
         getToken()
       );
@@ -51,9 +51,15 @@ function Profile({ logOut }) {
       <ContentHeader title="Profile" logOut={logOut} />
       <h2 className="sr-only">Statistics</h2>
       <div className="profile-cards cards">
-        <Card boxSubject="Name" boxAmountNumber="Ike Grobben" />
-        <Card boxSubject="Job position" boxAmountNumber="Security Guard" />
-        <Card boxSubject="At location" boxAmountNumber="Novi" />
+        <Card
+          boxSubject="Name"
+          boxAmountNumber={context.user.firstname + " " + context.user.lastname}
+        />
+        <Card
+          boxSubject="Job position"
+          boxAmountNumber={context.user.position}
+        />
+        <Card boxSubject="Aegis role" boxAmountNumber={context.user.role} />
       </div>
       <div className="password-change">
         <InputField

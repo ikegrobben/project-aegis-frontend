@@ -26,7 +26,7 @@ function AuthContextProvider({ children }) {
       async function fetchUserData() {
         try {
           const response = await axios.get(
-            `http://localhost:8080/users/${decodedToken.sub}`,
+            `http://localhost:8080/user/${decodedToken.sub}`,
             getToken()
           );
 
@@ -95,7 +95,7 @@ function AuthContextProvider({ children }) {
     async function fetchUserData() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/users/${decodedToken.sub}`,
+          `http://localhost:8080/user/${decodedToken.sub}`,
           getToken()
         );
 

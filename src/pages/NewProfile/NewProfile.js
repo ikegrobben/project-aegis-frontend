@@ -111,7 +111,7 @@ function Profile({ logOut }) {
             )}
             <label id="userlevel" htmlFor="role.id"></label>
             <select className="report-dropdown" {...register("role")}>
-              <option value="" disabled selected hidden>
+              <option defaultValue="Choose a user level" hidden>
                 Choose a user level
               </option>
               <option value="USER">User</option>

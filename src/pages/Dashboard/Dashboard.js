@@ -93,7 +93,7 @@ function Dashboard({ logOut }) {
               classNameButton="btn btn--light-blue"
             />
           </Link>
-          <Link to="/report/last">
+          <Link to="/report/last-report">
             <Button
               name="See todays report"
               type="button"

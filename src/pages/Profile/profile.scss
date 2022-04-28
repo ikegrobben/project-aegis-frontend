@@ -24,5 +24,9 @@
 }
 
 .greyed {
-  color: $green-label-bote;
+  color: $grey-medium;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: not-allowed;
 }

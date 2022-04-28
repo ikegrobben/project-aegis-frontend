@@ -58,5 +58,7 @@ export function SortItems(sortArray, sortType, sortBy) {
         ? 1
         : 0
     );
+  } else if (sortType === "enabled" && sortBy === "enabled first") {
+    sortArray.sort((a, b) => b.enabled - a.enabled);
   }
 }

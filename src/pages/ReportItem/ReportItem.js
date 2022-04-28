@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 // Import components
 import Card from "../../components/Card/Card";
@@ -14,7 +15,7 @@ import "./reportitem.scss";
 import items from "../../services/report.json";
 
 // Import logic
-import { getReportDate } from "../../logic/DateCheck";
+import { currentDate, getReportDate, dateToday } from "../../logic/DateCheck";
 import { statusCheck } from "../../logic/StatusCheck";
 import { getImage } from "../../logic/base64";
 import { getToken } from "../../logic/JwtToken";
@@ -98,13 +99,16 @@ function ReportItem({ logOut }) {
             classNameButton="btn btn--light-blue"
             clickFunction={() => navigate(-1)}
           />
-          <Link to={`/report-item/${report.id}/edit`}>
-            <Button
-              name="edit"
-              type="button"
-              classNameButton="btn btn--yellow"
-            />
-          </Link>
+          {moment(report.reportItemDateTime).format("YYYY-MM-DD") ===
+          moment(new Date()).format("YYYY-MM-DD") ? (
+            <Link to={`/report-item/${report.id}/edit`}>
+              <Button
+                name="edit"
+                type="button"
+                classNameButton="btn btn--yellow"
+              />
+            </Link>
+          ) : null}
         </div>
       </>
     )
