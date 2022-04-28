@@ -9,9 +9,9 @@ import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader
 import ReportItems from "../../components/ReportItems/ReportItems";
 
 // Temp import for data
-import { getReportDate } from "../../logic/DateCheck";
-import { countStatus } from "../../logic/Count";
-import { getToken } from "../../logic/JwtToken";
+import { getReportDate } from "../../Logic/DateCheck";
+import { countStatus } from "../../Logic/Count";
+import { getToken } from "../../Logic/JwtToken";
 
 function ShiftReport({ logOut }) {
   // TODO - Create a seperate function for reportTitleDate

@@ -18,10 +18,10 @@ import {
   countOcc,
   countOccCategories,
   countOccStatus,
-} from "../../logic/Count";
-import { getMonth } from "../../logic/DateCheck";
-import { calculatePercentage } from "../../logic/Calculate";
-import { getToken } from "../../logic/JwtToken";
+} from "../../Logic/Count";
+import { getMonth } from "../../Logic/DateCheck";
+import { calculatePercentage } from "../../Logic/Calculate";
+import { getToken } from "../../Logic/JwtToken";
 
 function MonthlyReport({ logOut }) {
   const [month, setMonth] = useState("april");

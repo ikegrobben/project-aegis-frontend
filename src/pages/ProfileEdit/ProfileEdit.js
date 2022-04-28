@@ -14,8 +14,8 @@ import Button from "../../components/Button/Button";
 import users from "../../services/employees.json";
 import InputField from "../../components/InputField/InputField";
 import axios from "axios";
-import { getToken } from "../../logic/JwtToken";
-import { AuthContext } from "../../logic/context";
+import { getToken } from "../../Logic/JwtToken";
+import { AuthContext } from "../../Logic/context";
 
 function Profile({ logOut }) {
   const context = useContext(AuthContext);

@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from "../../logic/context";
+import { AuthContext } from "../../Logic/context";
 
 // Import scss
-import "./navigation.scss";
+import "./Navigation.scss";
 
 // Import images
 import logo from "../../assets/images/logo-text.png";
-import user from "../../assets/images/User.png";
 
 function Navigation({ authenticated }) {
   const context = useContext(AuthContext);

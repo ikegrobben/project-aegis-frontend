@@ -8,15 +8,11 @@ import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import ReportItems from "../../components/ReportItems/ReportItems";
 import Button from "../../components/Button/Button";
+import { calculatePercentage } from "../../Logic/Calculate";
+import { getToken } from "../../Logic/JwtToken";
 
 // Import scss
-import "./dashboard.scss";
-
-// Temp import for data
-import items from "../../services/report.json";
-import { countStatus } from "../../logic/Count";
-import { calculatePercentage } from "../../logic/Calculate";
-import { getToken } from "../../logic/JwtToken";
+import "./Dashboard.scss";
 
 function Dashboard({ logOut }) {
   const [reportsOpen, setReportsOpen] = useState(null);

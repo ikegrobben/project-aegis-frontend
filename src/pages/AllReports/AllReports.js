@@ -5,14 +5,11 @@ import { Link } from "react-router-dom";
 // import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
+import { countItems, countOccStatus, countStatus } from "../../Logic/Count";
+import { getToken } from "../../Logic/JwtToken";
 
 // import scss
-import "./allreports.scss";
-
-// import temp db
-import reports from "../../services/reportsdb.json";
-import { countItems, countOccStatus, countStatus } from "../../logic/Count";
-import { getToken } from "../../logic/JwtToken";
+import "./AllReports.scss";
 
 function AllReports({ logOut }) {
   const [reports, setReports] = useState(null);

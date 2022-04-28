@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { AuthContext } from "../../logic/context";
+import { AuthContext } from "../../Logic/context";
 
 // Import components
 import Card from "../../components/Card/Card";
@@ -16,10 +16,10 @@ import "./newreportitem.scss";
 // Temp import for data
 
 // Import logic
-import { currentDate } from "../../logic/DateCheck";
+import { currentDate } from "../../Logic/DateCheck";
 
-import { uploadImage } from "../../logic/base64";
-import { getToken } from "../../logic/JwtToken";
+import { uploadImage } from "../../Logic/base64";
+import { getToken } from "../../Logic/JwtToken";
 
 function NewReportItem({ logOut }) {
   const [image, setImage] = useState(null);

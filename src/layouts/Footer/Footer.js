@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import scss
-import "./footer.scss";
+import "./Footer.scss";
 
 function Footer() {
   return (

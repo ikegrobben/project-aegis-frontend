@@ -24,7 +24,7 @@ import NewProfile from "./pages/NewProfile/NewProfile";
 
 // Import scss files
 import "./App.scss";
-import { AuthContext, logout, autoLogout } from "./logic/context";
+import { AuthContext, logout, autoLogout } from "./Logic/context";
 
 function App() {
   const { isAuth, logout } = useContext(AuthContext);

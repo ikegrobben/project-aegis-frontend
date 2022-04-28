@@ -14,7 +14,7 @@ import "./newprofile.scss";
 import users from "../../services/employees.json";
 import InputField from "../../components/InputField/InputField";
 import axios from "axios";
-import { getToken } from "../../logic/JwtToken";
+import { getToken } from "../../Logic/JwtToken";
 import DropDown from "../../components/DropDown/DropDown";
 
 function Profile({ logOut }) {

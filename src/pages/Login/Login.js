@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../logic/context";
+import { AuthContext } from "../../Logic/context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
 
 // Import scss
-import "./login.scss";
+import "./Login.scss";
 
 // Function
 function Login({ authenticated, toggleAuthenticated }) {

@@ -18,9 +18,9 @@ import locations from "../../services/location.json";
 import categories from "../../services/category.json";
 
 // Import logic
-import { getReportDate } from "../../logic/DateCheck";
-import { uploadImage } from "../../logic/base64";
-import { getToken } from "../../logic/JwtToken";
+import { getReportDate } from "../../Logic/DateCheck";
+import { uploadImage } from "../../Logic/base64";
+import { getToken } from "../../Logic/JwtToken";
 
 function EditReportItem({ logOut }) {
   // * Opens an item based on ID

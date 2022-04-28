@@ -12,9 +12,9 @@ import Button from "../../components/Button/Button";
 
 // import temp db
 import users from "../../services/employees.json";
-import { AuthContext } from "../../logic/context";
-import { getToken } from "../../logic/JwtToken";
-import { SortItems } from "../../logic/FilterSortItems";
+import { AuthContext } from "../../Logic/context";
+import { getToken } from "../../Logic/JwtToken";
+import { SortItems } from "../../Logic/FilterSortItems";
 
 function Profile({ logOut }) {
   const [allUsers, setAllUsers] = useState(null);

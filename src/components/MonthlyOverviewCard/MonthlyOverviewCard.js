@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import scss
-import "./monthlyoverviewcard.scss";
+import "./MonthlyOverviewCard.scss";
 
 function MonthlyOverviewCard({ reportObject, filterType, filterBy }) {
   const categoryArray = reportObject.map((c) => ({

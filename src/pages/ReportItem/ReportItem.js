@@ -9,17 +9,14 @@ import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Button from "../../components/Button/Button";
 
 // import scss
-import "./reportitem.scss";
-
-// Temp import for data
-import items from "../../services/report.json";
+import "./ReportItem.scss";
 
 // Import logic
-import { currentDate, getReportDate, dateToday } from "../../logic/DateCheck";
-import { statusCheck } from "../../logic/StatusCheck";
-import { getImage } from "../../logic/base64";
-import { getToken } from "../../logic/JwtToken";
-import { AuthContext } from "../../logic/context";
+import { currentDate, getReportDate, dateToday } from "../../Logic/DateCheck";
+import { statusCheck } from "../../Logic/StatusCheck";
+import { getImage } from "../../Logic/base64";
+import { getToken } from "../../Logic/JwtToken";
+import { AuthContext } from "../../Logic/context";
 
 function ReportItem({ logOut }) {
   // * Opens an item based on ID
