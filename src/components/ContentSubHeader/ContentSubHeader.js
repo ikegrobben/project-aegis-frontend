@@ -11,12 +11,10 @@ import "./contentsubheader.scss";
 function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
   const { register, handleSubmit } = useForm();
 
-  // TODO - Move functions to logic
-
   function setAMonth(data) {
-    console.log(data.Month);
     setNewMonth(data.Month);
   }
+
   function hideTopBar() {
     if (hideBar === "yes") {
       return "top-bar hide";
@@ -31,7 +29,9 @@ function ContentSubHeader({ title, hideBar, setNewMonth, display }) {
         <div className="container-button-select">
           <form className={display} onChange={handleSubmit(setAMonth)}>
             <select {...register("Month", { required: true })}>
-              <option value="">Choose a month</option>
+              <option hidden value="">
+                Choose a month
+              </option>
               <option value="January">January</option>
               <option value="February">February</option>
               <option value="March">March</option>

@@ -55,18 +55,18 @@ function AllReports({ logOut }) {
       <h2 className="sr-only">Statistics</h2>
       <div className="cards">
         <Card
-          boxSubject="Total daily reports"
-          boxAmountNumber={reportCount}
+          topRow="Total daily reports"
+          middleRow={reportCount}
           boxInfo="And that within the first half of the year"
         />
         <Card
-          boxSubject="Total items reported"
-          boxAmountNumber={totalItems}
+          topRow="Total items reported"
+          middleRow={totalItems}
           boxInfo="thats alot of words"
         />
         <Card
-          boxSubject="Total items open"
-          boxAmountNumber={totalOpen}
+          topRow="Total items open"
+          middleRow={totalOpen}
           boxInfo="pay attention to open items"
         />
       </div>
@@ -103,11 +103,9 @@ function AllReports({ logOut }) {
                     <span className="blue">{report.reportDate}</span>
                   </div>
                   <div className="open-items">
-                    {console.log(report.reportItems)}
                     {countOccStatus(report.reportItems, "Open")}
                   </div>
                   <div className="closed-items">
-                    {console.log(report.reportItems)}
                     {countOccStatus(report.reportItems, "Closed")}
                   </div>
                   <div className="total-items">{report.reportItems.length}</div>

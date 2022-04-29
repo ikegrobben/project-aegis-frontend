@@ -128,10 +128,11 @@
           align-self: center;
           background-color: $main-blue;
           border-radius: 0.5em;
-        }
 
-        & img {
-          vertical-align: baseline;
+          &:hover {
+            background-color: $blue-label-bg;
+            color: $main-blue;
+          }
         }
       }
     }

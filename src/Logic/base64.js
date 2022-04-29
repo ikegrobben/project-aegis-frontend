@@ -16,10 +16,9 @@ export function getImageLength(base64) {
   }
 }
 
-// Convert Image to base 64 and upload;
+// Send Image to base64 converter and upload;
 export const uploadImage = async (e) => {
   const file = e.target.files[0];
-  console.log(file);
   const base64 = await convertBase64(file);
   const imageReturn = base64;
   return imageReturn;

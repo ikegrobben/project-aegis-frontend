@@ -8,10 +8,12 @@ function InputField({
   requiredInput,
   classNameLabel,
   classNameInput,
+  errormsg,
 }) {
   return (
     <>
       <label className={classNameLabel} htmlFor={inputId}></label>
+      {errormsg}
       <input
         className={classNameInput}
         type={inputType}

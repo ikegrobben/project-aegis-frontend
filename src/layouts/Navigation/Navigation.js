@@ -10,6 +10,8 @@ import logo from "../../assets/images/logo-text.png";
 
 function Navigation({ authenticated }) {
   const context = useContext(AuthContext);
+
+  // Function toggleNavigation is used to create a mobile friendly navigation on smaller screens.
   function toggleNavigation() {
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const mobileNav = document.querySelector(".header-nav__list");

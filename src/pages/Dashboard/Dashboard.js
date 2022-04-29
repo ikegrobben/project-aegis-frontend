@@ -18,10 +18,8 @@ function Dashboard({ logOut }) {
   const [reportsOpen, setReportsOpen] = useState(null);
   const [reportsClosed, setReportsClosed] = useState(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
     async function fetchData() {
       try {
-        console.log(token);
         const requestOne = axios.get(
           "http://localhost:8080/report-items/open",
           getToken()
@@ -54,18 +52,18 @@ function Dashboard({ logOut }) {
         <h2 className="sr-only">Statistics</h2>
         <div className="cards">
           <Card
-            boxSubject="Total open reports"
-            boxAmountNumber={reportsOpen.length}
+            topRow="Total open reports"
+            middleRow={reportsOpen.length}
             boxInfo="Pay attention to open items"
           />
           <Card
-            boxSubject="Total closed reports"
-            boxAmountNumber={reportsClosed.length}
+            topRow="Total closed reports"
+            middleRow={reportsClosed.length}
             boxInfo="and succesfully handled!"
           />
           <Card
-            boxSubject="Total reports count"
-            boxAmountNumber={reportsOpen.length + reportsClosed.length}
+            topRow="Total reports count"
+            middleRow={reportsOpen.length + reportsClosed.length}
             boxInfo={`${calculatePercentage(
               reportsOpen.length,
               reportsClosed.length

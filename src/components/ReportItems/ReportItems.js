@@ -6,7 +6,7 @@ import { FilterItems, SortItems } from "../../Logic/FilterSortItems";
 import { dateToday } from "../../Logic/DateCheck";
 import { statusCheck } from "../../Logic/StatusCheck";
 import { Link } from "react-router-dom";
-import { getImage, getImageLength } from "../../Logic/base64";
+import { getImageLength } from "../../Logic/base64";
 
 // Import css
 import "./ReportItems.scss";
@@ -18,17 +18,12 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
   // * - Filter the Array of objects
   const reportItems = FilterItems(reportObject, filterType, filterBy);
 
-  // * - Sort items
+  // * - Sort the Array of objects
   SortItems(reportItems, sortType, sortBy);
-
-  console.log(reportItems);
 
   return (
     reportItems &&
     reportItems.map((reportItem) => {
-      const image = getImage(reportItem.image);
-      console.log(image);
-      console.log(reportItem.reportItemDateTime);
       return (
         <Link
           to={`/report-item/${reportItem.id}`}
@@ -47,6 +42,7 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
               </div>
               <div className="report-item__report">
                 <div className="report-item__paragraph">
+                  {/* If report message is equal or bigger then 250 hide the other characters */}
                   {reportItem.content.length >= 250
                     ? reportItem.content.slice(0, 250) + " . . ."
                     : reportItem.content}
@@ -67,9 +63,13 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
                 </ul>
               </div>
               <div className="report-item__status">
+                {/* statusCheck returns a span with classname based on open or closed */}
                 {statusCheck(reportItem.status)}
               </div>
               <div className="report-item__comments">
+                {/* getImageLength returns how many images are in the report. */}
+                {/* The reason this is a function is because the img is a base64 string */}
+                {/* in the function the base64 string is converted to a img */}
                 <span>{getImageLength(reportItem.image)}</span>
               </div>
             </article>

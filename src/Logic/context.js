@@ -14,15 +14,10 @@ function AuthContextProvider({ children }) {
   });
 
   useEffect(() => {
-    // We zijn opnieuw opgestart
-    // Hebben we een token in de local storage staan? En is deze nog geldig?
     const token = localStorage.getItem("token");
 
     if (token) {
       const decodedToken = jwt_decode(token);
-
-      // Is de token nog geldig? Decodeer de token en check de exp key en vergelijk dit met new Date();
-      // dan halen we data op
       async function fetchUserData() {
         try {
           const response = await axios.get(
@@ -30,9 +25,6 @@ function AuthContextProvider({ children }) {
             getToken()
           );
 
-          console.log(response.data);
-
-          // zet de gegevens van de gebruiker in de state!
           setAuth({
             ...auth,
             isAuth: true,
@@ -52,14 +44,13 @@ function AuthContextProvider({ children }) {
           console.log(e);
 
           if (e.response.status === 500) {
-            console.log("De server deed het niet");
+            console.log("A problem in the backend");
           } else if (e.response.status === 404) {
-            console.log("De developer heeft iets doms gedaan in het request");
+            console.log("404 not found");
           } else {
-            console.log("Het ging mis. Geen idee wat.");
+            console.log("Something went wrong");
           }
 
-          // ging het ophalen mis? Dan behouden we de initiele state, maar zetten de status op 'done'
           setAuth({
             ...auth,
             status: "done",
@@ -69,7 +60,6 @@ function AuthContextProvider({ children }) {
 
       fetchUserData();
     } else {
-      // Geen token? We behouden de initiele state, maar zetten de status op 'done'
       setAuth({
         ...auth,
         status: "done",
@@ -79,19 +69,16 @@ function AuthContextProvider({ children }) {
 
   const navigate = useNavigate();
 
+  // changes a string to first letter uppercase and other chars
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
   function login(jwtToken) {
-    // 1. We ontvangen de token. Zet de token in de localStorage:
     localStorage.setItem("token", jwtToken);
 
-    // 2. We willen weten wat er allemaal te vinden is in deze token, dus we decoden hem:
     const decodedToken = jwt_decode(jwtToken);
-    console.log(decodedToken);
 
-    // TODO -------------------------------
     async function fetchUserData() {
       try {
         const response = await axios.get(
@@ -99,9 +86,6 @@ function AuthContextProvider({ children }) {
           getToken()
         );
 
-        console.log(response.data);
-
-        // zet de gegevens van de gebruiker in de state!
         setAuth({
           ...auth,
           isAuth: true,
@@ -118,17 +102,15 @@ function AuthContextProvider({ children }) {
         });
       } catch (e) {
         console.error(e);
-        console.log(e);
 
         if (e.response.status === 500) {
-          console.log("De server deed het niet");
+          console.log("A problem in the backend");
         } else if (e.response.status === 404) {
-          console.log("De developer heeft iets doms gedaan in het request");
+          console.log("404 not found");
         } else {
-          console.log("Het ging mis. Geen idee wat.");
+          console.log("Something went wrong");
         }
 
-        // ging het ophalen mis? Dan behouden we de initiele state, maar zetten de status op 'done'
         setAuth({
           ...auth,
           status: "done",
@@ -137,16 +119,11 @@ function AuthContextProvider({ children }) {
     }
 
     fetchUserData();
-    // TODO -------------------------------
-
-    // 3. Zet de user-info die je hebt opgehaald in de context-state:
-    console.log("Gebruiker is ingelogd!");
 
     navigate("/");
   }
 
   function logout() {
-    console.log("Gebruiker is uitgelogd!");
     setAuth({
       ...auth,
       isAuth: false,

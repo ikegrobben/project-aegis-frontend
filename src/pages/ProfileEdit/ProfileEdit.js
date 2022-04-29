@@ -1,46 +1,48 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 // import components
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import Card from "../../components/Card/Card";
+import InputField from "../../components/InputField/InputField";
 
 // import scss
 import "./profileedit.scss";
 import Button from "../../components/Button/Button";
 
-// import temp db
-import users from "../../services/employees.json";
-import InputField from "../../components/InputField/InputField";
-import axios from "axios";
+// Import logics
 import { getToken } from "../../Logic/JwtToken";
 import { AuthContext } from "../../Logic/context";
 
 function Profile({ logOut }) {
   const context = useContext(AuthContext);
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   async function sendData(form) {
     try {
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:8080/user/${context.user.id}/password`,
         form,
         getToken()
       );
-      console.log(response);
       navigate(-1);
     } catch (e) {
       console.error(e);
     }
   }
 
+  // Check if new password and repeated new password match.
   function changePassword(data) {
     if (data.newPassword === data.repeatPassword) {
       delete data["repeatPassword"];
       const jsonData = JSON.stringify(data);
-      console.log(jsonData);
       sendData(jsonData);
     } else {
       console.log("Password doesn't match");
@@ -52,14 +54,11 @@ function Profile({ logOut }) {
       <h2 className="sr-only">Statistics</h2>
       <div className="profile-cards cards">
         <Card
-          boxSubject="Name"
-          boxAmountNumber={context.user.firstname + " " + context.user.lastname}
+          topRow="Name"
+          middleRow={context.user.firstname + " " + context.user.lastname}
         />
-        <Card
-          boxSubject="Job position"
-          boxAmountNumber={context.user.position}
-        />
-        <Card boxSubject="Aegis role" boxAmountNumber={context.user.role} />
+        <Card topRow="Job position" middleRow={context.user.position} />
+        <Card topRow="Aegis role" middleRow={context.user.role} />
       </div>
       <div className="password-change">
         <InputField
@@ -68,7 +67,13 @@ function Profile({ logOut }) {
           classNameInput="old-password__input"
           inputType="password"
           inputName="Old Password"
+          requiredInput={true}
           register={register}
+          errormsg={
+            errors.oldPassword && (
+              <span className="error-msg">Old password is required</span>
+            )
+          }
         />
         <InputField
           classNameLabel="newPassword"
@@ -76,7 +81,13 @@ function Profile({ logOut }) {
           classNameInput="new-password__input"
           inputType="password"
           inputName="New Password"
+          requiredInput={true}
           register={register}
+          errormsg={
+            errors.newPassword && (
+              <span className="error-msg">New password is required</span>
+            )
+          }
         />
         <InputField
           classNameLabel="repeatPassword"
@@ -84,7 +95,13 @@ function Profile({ logOut }) {
           classNameInput="repeat-password__input"
           inputType="password"
           inputName="Repeat New Password"
+          requiredInput={true}
           register={register}
+          errormsg={
+            errors.repeatPassword && (
+              <span className="error-msg">Repeat password is required</span>
+            )
+          }
         />
       </div>
       <div className="buttons">

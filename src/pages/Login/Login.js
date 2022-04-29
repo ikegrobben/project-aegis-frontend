@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Logic/context";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Import components
@@ -12,12 +11,14 @@ import Button from "../../components/Button/Button";
 import "./Login.scss";
 
 // Function
-function Login({ authenticated, toggleAuthenticated }) {
+function Login() {
   // useState & useForm
   const { login } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm();
-
-  let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // TODO - When backend is live change this
   async function postLogin(data) {
@@ -29,9 +30,12 @@ function Login({ authenticated, toggleAuthenticated }) {
       const result = await axios.post("http://localhost:8080/login", json, {
         Headers: { "Content-Type": "application/json" },
       });
-      console.log(result);
       login(result.data);
     } catch (error) {
+      // BUG React hook form breaks on setError based on server response. handleSubmit doesn't work anymore. No fix found
+      // if (error.response.status === 401) {
+      //   setError("apiError", { type: "server", message: "custom message" });
+      // }
       console.error(error);
     }
   }
@@ -43,6 +47,10 @@ function Login({ authenticated, toggleAuthenticated }) {
           Login
         </h1>
         <form className="login__form" onSubmit={handleSubmit(postLogin)}>
+          {/* // BUG - see Reach hook form bug setError */}
+          {/* <span className="error-msg">
+            {errors.apiError && errors.apiError.message}
+          </span> */}
           <InputField
             inputId="username"
             inputName="Username"
@@ -51,6 +59,11 @@ function Login({ authenticated, toggleAuthenticated }) {
             requiredInput={true}
             classNameLabel="login__form--label"
             classNameInput="login__form--input"
+            errormsg={
+              errors.username && (
+                <span className="error-msg">Username is required</span>
+              )
+            }
           />
           <InputField
             inputId="password"
@@ -60,6 +73,11 @@ function Login({ authenticated, toggleAuthenticated }) {
             requiredInput={true}
             classNameLabel="login__form--label"
             classNameInput="login__form--input"
+            errormsg={
+              errors.username && (
+                <span className="error-msg">Password is required</span>
+              )
+            }
           />
           <Button
             name="Login"

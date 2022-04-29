@@ -1,21 +1,22 @@
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
-
+// Count total report items
 export function countItems(data) {
   let counter = 0;
   data.map((dat) => {
-    let testcounter = dat.reportItems.length;
-    counter = counter + testcounter;
+    let secondCounter = dat.reportItems.length;
+    counter = counter + secondCounter;
+    return null;
   });
 
   return counter;
 }
 
+// count total items with a status.
 export function countStatus(data, value) {
   let counter = 0;
-  console.log(data);
   data.map((dat) => {
-    let testCounter = countOccStatus(dat.reportItems, value);
-    counter = counter + testCounter;
+    let secondCounter = countOccStatus(dat.reportItems, value);
+    counter = counter + secondCounter;
+    return null;
   });
   return counter;
 }
@@ -24,25 +25,6 @@ export function countOccStatus(array, value) {
   let counter = 0;
   for (let i = 0; i < array.length; i++) {
     if (array[i].status === value) {
-      counter++;
-    }
-  }
-  return counter;
-}
-
-export function countCategories(data, value) {
-  let counter = 0;
-  data.map((dat) => {
-    let testCounter = countOccCategories(dat.reportItems, value);
-    counter = counter + testCounter;
-  });
-  return counter;
-}
-
-export function countOccCategories(array, value) {
-  let counter = 0;
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].category.name === value) {
       counter++;
     }
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // Import components
@@ -14,7 +14,6 @@ import { countStatus } from "../../Logic/Count";
 import { getToken } from "../../Logic/JwtToken";
 
 function ShiftReport({ logOut }) {
-  // TODO - Create a seperate function for reportTitleDate
   const [report, setReport] = useState(null);
   const [totalClosed, setTotalClosed] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -28,7 +27,6 @@ function ShiftReport({ logOut }) {
           `http://localhost:8080/report/${id}`,
           getToken()
         );
-        console.log(result.data[0]);
         setTotalOpen(countStatus(result.data, "Open"));
         setTotalClosed(countStatus(result.data, "Closed"));
         setTotalItems(result.data[0].reportItems.length);
@@ -54,18 +52,18 @@ function ShiftReport({ logOut }) {
         <h2 className="sr-only">Statistics</h2>
         <div className="cards">
           <Card
-            boxSubject="Open reports today"
-            boxAmountNumber={totalOpen}
+            topRow="Open reports today"
+            middleRow={totalOpen}
             boxInfo="Pay attention to open items"
           />
           <Card
-            boxSubject="Closed reports today"
-            boxAmountNumber={totalClosed}
+            topRow="Closed reports today"
+            middleRow={totalClosed}
             boxInfo="and succesfully handled!"
           />
           <Card
-            boxSubject="Total items reported today"
-            boxAmountNumber={totalItems}
+            topRow="Total items reported today"
+            middleRow={totalItems}
             boxInfo="That are 11 less reports then last month!"
           />
         </div>

@@ -64,12 +64,7 @@ function NewReportItem({ logOut }) {
 
   async function sendData(form) {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/report-item",
-        form,
-        getToken()
-      );
-      console.log(response);
+      await axios.post("http://localhost:8080/report-item", form, getToken());
       navigate(-1);
     } catch (error) {
       console.error(error);
@@ -77,16 +72,14 @@ function NewReportItem({ logOut }) {
     }
   }
 
+  // Delete uploaded image and add base64 encoded image.
   const sendFormData = async (data) => {
-    delete data["upload-image"];
     data.image = image;
-    console.log(data);
-    console.log(image);
     const jsonData = JSON.stringify(data);
-    console.log(jsonData);
     sendData(jsonData);
   };
 
+  // Change image to base64
   async function imageEncode(data) {
     const imageFile = await uploadImage(data);
     setImage(imageFile);
@@ -99,35 +92,52 @@ function NewReportItem({ logOut }) {
       <form onSubmit={handleSubmit(sendFormData)}>
         <div className="cards report-item__cards">
           <Card
-            boxSubject="Creating by"
-            boxAmountNumber={`${context.user.firstname} ${context.user.lastname}`}
+            topRow="Creating by"
+            middleRow={`${context.user.firstname} ${context.user.lastname}`}
           />
           <Card
-            boxSubject="Location"
-            boxAmountNumber={
+            topRow="Location"
+            middleRow={
               locations && (
                 <DropDown
+                  name="location"
                   dropDownId="location.id"
                   register={register}
                   classNameLabel="dropdown"
                   classNameDropDown="report-dropdown"
                   options={locations}
-                  // selected={}
+                  dropdownText="Choose a location"
+                  isRequired="true"
+                  errormsg={
+                    errors.location && (
+                      <span className="error-msg small">
+                        {" "}
+                        Choose a location
+                      </span>
+                    )
+                  }
                 />
               )
             }
           />
           <Card
-            boxSubject="Category"
-            boxAmountNumber={
+            topRow="Category"
+            middleRow={
               categories && (
                 <DropDown
+                  name="category"
                   dropDownId="category.id"
                   register={register}
                   classNameLabel="dropdown"
                   classNameDropDown="report-dropdown"
                   options={categories}
-                  // selected={}
+                  dropdownText="Choose a category"
+                  isRequired="true"
+                  errormsg={
+                    errors.category && (
+                      <span className="error-msg small">Choose a category</span>
+                    )
+                  }
                 />
               )
             }
@@ -136,23 +146,34 @@ function NewReportItem({ logOut }) {
         <p>
           status: <label htmlFor="status"></label>
           <select
-            {...register("status")}
+            name="status"
+            {...register("status", { required: true })}
             // defaultValue={}
             className="report-dropdown"
           >
+            <option value="" hidden>
+              Choose a status
+            </option>
             <option value="Open">Open</option>
             <option value="Closed">Closed</option>
           </select>
+          {errors.status && <span className="error-msg"> Choose a status</span>}
         </p>
 
         <textarea
           className="edit-report"
-          {...register("content")}
+          {...register("content", { required: true })}
           id="report-text"
           name="report-text"
+          placeholder="Type your report here"
           // defaultValue={}
           onChange={(e) => setValue("content", e.target.value)}
         ></textarea>
+        {errors.content && (
+          <span className="error-msg block">
+            You need to input a report text
+          </span>
+        )}
         <label htmlFor="image-upload"></label>
         <input
           {...register("upload-image")}

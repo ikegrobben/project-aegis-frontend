@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // import components
@@ -11,7 +11,6 @@ import "./profile.scss";
 import Button from "../../components/Button/Button";
 
 // import temp db
-import users from "../../services/employees.json";
 import { AuthContext } from "../../Logic/context";
 import { getToken } from "../../Logic/JwtToken";
 import { SortItems } from "../../Logic/FilterSortItems";
@@ -45,17 +44,17 @@ function Profile({ logOut }) {
     fetchData();
   }, []);
 
+  // Useeffect with a build in mount reject. so on initial load nothing happens
   useEffect(() => {
     if (didMount.current) {
       async function deleteUser() {
         try {
-          const result = await axios.put(
+          await axios.put(
             `http://localhost:8080/user/${userId}/active-state-change`,
             null,
             getToken()
           );
           navigate(0);
-          console.log(result);
         } catch (e) {
           console.error(e);
         }
@@ -64,7 +63,7 @@ function Profile({ logOut }) {
     } else {
       didMount.current = true;
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   if (context.user.enabled === false) {
     logout();
@@ -76,16 +75,13 @@ function Profile({ logOut }) {
       <h2 className="sr-only">Statistics</h2>
       <div className="profile-cards cards">
         <Card
-          boxSubject="Name"
-          boxAmountNumber={context.user.firstname + " " + context.user.lastname}
+          topRow="Name"
+          middleRow={context.user.firstname + " " + context.user.lastname}
         />
-        <Card
-          boxSubject="Job position"
-          boxAmountNumber={context.user.position}
-        />
-        <Card boxSubject="Aegis role" boxAmountNumber={context.user.role} />
+        <Card topRow="Job position" middleRow={context.user.position} />
+        <Card topRow="Aegis role" middleRow={context.user.role} />
       </div>
-      {/* IF ADMIN */}
+      {/* if Admin you can see the cards below else return nothing.*/}
       {context.user.role === "Admin" ? (
         <>
           <h3 className="h3-employees">Employees</h3>
@@ -96,9 +92,10 @@ function Profile({ logOut }) {
                   return (
                     <Card
                       key={user.id}
-                      boxSubject={user.job.name}
-                      boxAmountNumber={`${user.firstname} ${user.lastname}`}
+                      topRow={user.job.name}
+                      middleRow={`${user.firstname} ${user.lastname}`}
                       boxInfo={
+                        // Only allow this button if your not the user. Else give null because if your acc is deactivated you can't login.
                         user.id !== context.user.id ? (
                           <button
                             className="reactivate"
@@ -114,9 +111,10 @@ function Profile({ logOut }) {
                   return (
                     <Card
                       key={user.id}
-                      boxSubject={user.job.name}
-                      boxAmountNumber={`${user.firstname} ${user.lastname}`}
+                      topRow={user.job.name}
+                      middleRow={`${user.firstname} ${user.lastname}`}
                       boxInfo={
+                        // Only allow this button if its not the logged in user, else return a disabled button.
                         user.id !== context.user.id ? (
                           <button
                             className="delete "
@@ -144,6 +142,7 @@ function Profile({ logOut }) {
           classNameButton="btn btn--light-blue"
           clickFunction={() => navigate("/profile/edit")}
         />
+        {/* Only Admins can add employees */}
         {context.user.role === "Admin" ? (
           <Button
             name="Add employee"

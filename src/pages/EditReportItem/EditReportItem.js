@@ -12,11 +12,6 @@ import DropDown from "../../components/DropDown/DropDown";
 // import scss
 import "./editreportitem.scss";
 
-// Temp import for data
-import items from "../../services/report.json";
-import locations from "../../services/location.json";
-import categories from "../../services/category.json";
-
 // Import logic
 import { getReportDate } from "../../Logic/DateCheck";
 import { uploadImage } from "../../Logic/base64";
@@ -84,26 +79,25 @@ function EditReportItem({ logOut }) {
 
   async function updateData(form) {
     try {
-      const res = await axios.put(
+      await axios.put(
         `http://localhost:8080/report-item/${id}`,
         form,
         getToken()
       );
-      console.log(res);
       navigate(-1);
     } catch (error) {
       console.error(error);
     }
   }
 
+  // Delete uploaded image and add base64 encoded image.
   const updateReport = async (data) => {
-    delete data["upload-image"];
     data.image = image;
     const jsonData = JSON.stringify(data);
-    console.log(jsonData);
     updateData(jsonData);
   };
 
+  // Change image to base64
   async function imageEncode(data) {
     const imageFile = await uploadImage(data);
     setImage(imageFile);
@@ -120,12 +114,12 @@ function EditReportItem({ logOut }) {
         <form onSubmit={handleSubmit(updateReport)}>
           <div className="cards report-item__cards">
             <Card
-              boxSubject="Created by"
-              boxAmountNumber={`${report.users.firstname} ${report.users.lastname}`}
+              topRow="Created by"
+              middleRow={`${report.users.firstname} ${report.users.lastname}`}
             />
             <Card
-              boxSubject="Location"
-              boxAmountNumber={
+              topRow="Location"
+              middleRow={
                 locations && (
                   <DropDown
                     dropDownId="location.id"
@@ -133,14 +127,14 @@ function EditReportItem({ logOut }) {
                     classNameLabel="dropdown"
                     classNameDropDown="report-dropdown"
                     options={locations}
-                    // selected={report.location.location}
+                    selected={report.location.id}
                   />
                 )
               }
             />
             <Card
-              boxSubject="Category"
-              boxAmountNumber={
+              topRow="Category"
+              middleRow={
                 categories && (
                   <DropDown
                     dropDownId="category.id"
@@ -148,7 +142,7 @@ function EditReportItem({ logOut }) {
                     classNameLabel="dropdown"
                     classNameDropDown="report-dropdown"
                     options={categories}
-                    // selected={report.category.category}
+                    selected={report.category.id}
                   />
                 )
               }
@@ -168,18 +162,24 @@ function EditReportItem({ logOut }) {
 
           <textarea
             className="edit-report"
-            {...register("content")}
+            {...register("content", { required: true })}
             id="report-text"
             name="report-text"
             defaultValue={report.content}
             onChange={(e) => setValue("content", e.target.value)}
           ></textarea>
+          {errors.content && (
+            <span className="error-msg block">
+              You need to input a report text
+            </span>
+          )}
           <label htmlFor="image-upload"></label>
           <input
-            {...register("upload-image")}
+            {...register("imageUpload")}
             id="image-upload"
             type="file"
             accept="image/jpeg, image/png"
+            // Image encode to Base64 is done onChange.
             onChange={(e) => imageEncode(e)}
           />
 
@@ -188,6 +188,7 @@ function EditReportItem({ logOut }) {
               name="back"
               type="button"
               classNameButton="btn btn--light-blue"
+              clickFunction={() => navigate(-1)}
             />
             <Button
               name="save changes"

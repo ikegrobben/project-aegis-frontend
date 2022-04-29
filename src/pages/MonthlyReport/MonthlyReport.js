@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 // Import scss
@@ -11,20 +10,15 @@ import Card from "../../components/Card/Card";
 import ContentSubHeader from "../../components/ContentSubHeader/ContentSubHeader";
 import MonthlyOverviewCard from "../../components/MonthlyOverviewCard/MonthlyOverviewCard";
 
-// Temp import for data
-import items from "../../services/report.json";
-import {
-  countCategories,
-  countOcc,
-  countOccCategories,
-  countOccStatus,
-} from "../../Logic/Count";
-import { getMonth } from "../../Logic/DateCheck";
+// Import logic
+import { countOccStatus } from "../../Logic/Count";
 import { calculatePercentage } from "../../Logic/Calculate";
 import { getToken } from "../../Logic/JwtToken";
 
 function MonthlyReport({ logOut }) {
-  const [month, setMonth] = useState("april");
+  const [month, setMonth] = useState(
+    new Date().toLocaleString("default", { month: "long" })
+  );
   const [data, setData] = useState(null);
   const [totalOpen, setTotalOpen] = useState(null);
   const [totalClosed, setTotalClosed] = useState(null);
@@ -36,7 +30,6 @@ function MonthlyReport({ logOut }) {
           getToken()
         );
         setData(result.data);
-        console.log(result.data);
         setTotalOpen(countOccStatus(result.data, "Open"));
         setTotalClosed(countOccStatus(result.data, "Closed"));
       } catch (error) {
@@ -46,13 +39,6 @@ function MonthlyReport({ logOut }) {
     fetchData();
   }, [month]);
 
-  // ? - Can we shorten this method
-  const monthDate = new Date();
-  const initialDate = monthDate.getMonth();
-  console.log(initialDate);
-
-  getMonth(month);
-
   const title = "Monthly report from " + month;
 
   return (
@@ -61,18 +47,18 @@ function MonthlyReport({ logOut }) {
       <h2 className="sr-only">Statistics</h2>
       <div className="cards">
         <Card
-          boxSubject="Security Score"
-          boxAmountNumber={calculatePercentage(totalOpen, totalClosed) + "%"}
+          topRow="Security Score"
+          middleRow={calculatePercentage(totalOpen, totalClosed) + "%"}
           boxInfo="What can we improve?"
         />
         <Card
-          boxSubject="Open reports this month"
-          boxAmountNumber={totalOpen}
+          topRow="Open reports this month"
+          middleRow={totalOpen}
           boxInfo="Pay attentions to open items."
         />
         <Card
-          boxSubject="Closed reports this month"
-          boxAmountNumber={totalClosed}
+          topRow="Closed reports this month"
+          middleRow={totalClosed}
           boxInfo="That are 13 more reports then last month!"
         />
       </div>

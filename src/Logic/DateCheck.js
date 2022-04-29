@@ -1,5 +1,3 @@
-import moment from "moment";
-
 // * Function for check if day === current day
 export function dateToday(day) {
   const today = new Date();
@@ -23,6 +21,7 @@ export function getReportDate(day) {
   return today.getFullYear() + " " + selectedMonth + " " + today.getDate();
 }
 
+// * Create a string with full date + time
 export function currentDate() {
   const today = new Date();
   const month = today.getMonth() + 1;
@@ -39,6 +38,7 @@ export function currentDate() {
   );
 }
 
+// * Get full written month
 export function getMonth(day) {
   const today = new Date(day);
   const selectedMonth = today.toLocaleString("default", { month: "long" });

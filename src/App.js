@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { Routes, Route } from "react-router-dom";
 
 // Import Routes
 import PrivateRoute from "./routes/PrivateRoutes/PrivateRoutes";
@@ -24,7 +24,7 @@ import NewProfile from "./pages/NewProfile/NewProfile";
 
 // Import scss files
 import "./App.scss";
-import { AuthContext, logout, autoLogout } from "./Logic/context";
+import { AuthContext } from "./Logic/context";
 
 function App() {
   const { isAuth, logout } = useContext(AuthContext);

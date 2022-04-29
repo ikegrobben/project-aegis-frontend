@@ -45,3 +45,14 @@ h3 {
 .text-center {
   text-align: center;
 }
+
+.error-msg {
+  color: $red-label-bote;
+  padding: 0;
+  font-size: 1em;
+}
+
+.small {
+  font-size: 0.625em;
+  font-weight: normal;
+}
