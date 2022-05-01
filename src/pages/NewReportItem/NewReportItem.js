@@ -196,7 +196,7 @@ function NewReportItem({ logOut }) {
             clickFunction={() => navigate(-1)}
           />
           <Button
-            name="save changes"
+            name="Post new report"
             type="submit"
             classNameButton="btn btn--green"
           />
