@@ -31,6 +31,7 @@ function ShiftReport({ logOut }) {
         setTotalClosed(countStatus(result.data, "Closed"));
         setTotalItems(result.data[0].reportItems.length);
         setReport(result.data[0].reportItems);
+        console.log(result.data);
       } catch (error) {
         console.error(error);
       }

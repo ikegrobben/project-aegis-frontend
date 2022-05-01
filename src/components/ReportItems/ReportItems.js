@@ -36,7 +36,7 @@ function ReportItems({ reportObject, filterType, filterBy, sortType, sortBy }) {
                 {/* check if date is today */}
                 {dateToday(
                   moment(reportItem.reportItemDateTime).format(
-                    "YYYY-MM-DD hh:mm"
+                    "YYYY-MM-DD HH:mm"
                   )
                 )}
               </div>
